@@ -83,9 +83,9 @@ NjLogger.Info("Here is a link to", aTestObj.AsLogRef(), "mixed in multiple argum
 It will keep a weak reference to the object unless you specifically ask for strong reference.
 `NjLogger.Info("A strong object link:", aTestObj.AsStrongLogRef());`
 
-A button will show up when you click on the log in console
-<img src="./images/logs-object-link.png" alt="Screenshot of object link" width="450" >
-You can then inspect the object and modfiy the values via that link.
+A button will show up when you click on the log in console  
+<img src="./images/logs-object-link.png" alt="Screenshot of object link" width="450" >  
+You can then inspect the object and modfiy the values via that link.  
 <img src="./images/logs-inspector.png" alt="Screenshot of object link" width="450" >
 
 > [!WARNING]
