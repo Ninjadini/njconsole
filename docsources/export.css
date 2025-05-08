@@ -1,0 +1,36 @@
+body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 20px 50px 20px;
+}
+
+code {
+  background-color: rgba(175, 184, 193, 0.2);
+  color: #1f2328;
+  font-size: 85%;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+}
+
+:not(pre):not(.hljs) > code
+{
+  background-color: rgba(175, 184, 193, 0.2);
+  color: #1f2328;
+  font-size: 85%;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+}
+
+
+pre > code {
+  padding: 0;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+  padding: 0;
+}
