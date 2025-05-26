@@ -43,11 +43,11 @@ channel.Warn("A warning in `myChannel`");
 
 Logs from Debug.Log() will still come through to console (default setting).
 
-<img src="./docsources/images/logs-window.png" alt="Screenshot of logs panel" width="450" >
+<img src="./images/logs-window.png" alt="Screenshot of logs panel" width="450" >
 
 ## Log filtering
 
-<img src="./docsources/images/log-filters.png" alt="Screenshot of log filtering" width="450" >
+<img src="./images/log-filters.png" alt="Screenshot of log filtering" width="450" >
 
 
 - Filter by Text Search  
@@ -89,7 +89,7 @@ You can then inspect the object and modfiy the values via that link.
 
 # Options menu / cheats
 
-<img src="./docsources/images/options-window.png" alt="Screenshot of log filtering" width="450" >
+<img src="./images/options-window.png" alt="Screenshot of log filtering" width="450" >
 
 **First create a catalog**  
 `ConsoleOptions.Catalog catalog = NjConsole.Options.CreateCatalog();`  
@@ -190,7 +190,7 @@ options.AddEnumChoice("A Choice Enum", () => platform, (v) => platform = v);
 You can press and hold on any of the options items or the folder to create a shortcut outside of console window.
 Shortcuts feature is for runtime overlay mode only.
 
-<img src="./docsources/images/options-shortcuts.png" alt="Screenshot of options shortcut" width="450" >
+<img src="./images/options-shortcuts.png" alt="Screenshot of options shortcut" width="450" >
 
 Items will be placed to alignment zones based on where your mouse is.
 For example, you can align items along top left filling towards right. or top left filling towards bottom. 
