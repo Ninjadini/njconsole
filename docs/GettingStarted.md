@@ -12,7 +12,8 @@
 - With mouse: Hold for 3 seconds at top left part of game screen.
 - With mouse: Tap 3 times at the top left corner of game screen.
 
-> All of the above can be customized in project settings > Ninjadini ⌨ Console
+All of the above can be customized in project settings > Ninjadini ⌨ Console  
+There, you may also want to set up a passphrase prompt to deter unauthorized users from reaching the console by accident.
    
    
    
@@ -67,15 +68,22 @@ var aTestObj = GetTestPlayerObj();
 NjLogger.Info("A simple object link:", aTestObj);
 NjLogger.Info("Here is a link to", aTestObj.AsLogRef(), "mixed in multiple arguments");
 ```
-It will keep a weak reference to the object unless you specifically ask for strong reference.
-`NjLogger.Info("A strong object link:", aTestObj.AsStrongLogRef());`
+> Object links are weak referenced, so they will not leak memory over time.
+> You may sometimes have the opposite problem where when you click the object it is already garbage collected.
+> In such cases where you need a strong ref for the duration of the log's lifetime (the age of the log ring), use this instead:
+> `NjLogger.Info("A strong object link:", aTestObj.AsStrongLogRef());`
 
 A button will show up when you click on the log in console  
 <img src="./docsources/images/logs-object-link.png" alt="Screenshot of object link" width="450" >  
 You can then inspect the object and modfiy the values via that link.  
 <img src="./docsources/images/logs-inspector.png" alt="Screenshot of object link" width="450" >
 
-> Object inspector's primary purpose is to allow you to debug things easily but it does not fully support modifying the data.
+> Object inspector's primary purpose is to allow you to debug things easily but it does not fully support modifying every data (yet).
+
+> Object links are weak referenced, so they will not leak memory over time.
+> You may sometimes have the opposite problem where when you click the object it is already garbage collected.
+> In such cases where you need a strong ref for the duration of the log's lifetime (the age of the log ring), use this instead:
+> `NjLogger.Info("A strong object link:", aTestObj.AsStrongLogRef());`
   
    
 
@@ -202,6 +210,10 @@ See other doc pages for more advanced topics such as:
 - Creating options menu for edit mode
 - creating custom panels
 - Build time customization (such as turning off features for specific build types)
+- Customize log timestamp output format
+- Accessing log history and custom log handlers
+- Custom shortcut style overlay like FPS monitor
+- Customize access challenge
 
 See table of content based on latest version here:
 https://github.com/Ninjadini/NjConsoleDocs/blob/main/README.md
