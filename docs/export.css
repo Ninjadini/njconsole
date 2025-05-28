@@ -6,6 +6,18 @@ body {
   padding: 0 20px 50px 20px;
 }
 
+h1{
+  padding-top: 50px;
+}
+
+h1,
+h2,
+h3{
+  font-style: bold;
+  font-weight: bold;
+}
+
+
 code {
   background-color: rgba(175, 184, 193, 0.2);
   color: #1f2328;
@@ -23,6 +35,13 @@ code {
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
   padding: 0.2em 0.4em;
   border-radius: 6px;
+}
+
+
+
+blockquote > p {
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 
