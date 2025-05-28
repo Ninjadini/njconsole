@@ -8,7 +8,7 @@ NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in
 - Navigate to: `Windows > ⌨ Ninjadini Console`
 - You can open multiple console windows by selecting the menu again.
 
-<img src="images/open-editor-window.png" alt="Screenshot of editor windows" width="600" >
+<img src="images/open-editor-window.png" alt="Screenshot of editor windows">
 
 ### 🕹️ Open console in game view
 - **Keyboard:** Press the <code>`</code> key (top-left on US keyboard). Press again to close.
