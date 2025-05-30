@@ -1,19 +1,10 @@
-# Ninjadini Debug Console for Unity
+# Ninjadini Debug Console [NjConsole] for Unity
 
-Your ultimate debug console for Unity.
+This repro is for documentation of [Ninjadini Console](https://u3d.as/3xye).
 
-- 📜 Runtime log viewer with filtering, search, and clickable stack traces
-- ⌨️ Near zero allocation logs
-- 🧩 Object inspector for exploring objects directly from log entries
-- 🧭 Hierarchy viewer — see live GameObjects and components
-- 🎮 Add custom menu items and keybindings for cheats or tools
-- 🖥️ Works in Unity Editor (seperate editor windows or in game view), standalone builds, mobile, and WebGL
-- 🧱 Modular: write your own modules and plug them into the console
+Rendered version of the docs can be found at   
+[https://ninjadini.github.io/njconsole/](https://ninjadini.github.io/njconsole/)
 
----
+Source `.md` files can be found in `docs/` folder.
 
-This repro is for documentation purposes only.  
-
-- [Getting Started](GettingStarted.md)
-- Build time customization
-- Custom panels (panel locking, uitoolkit / OnGUI) (TODO)
+We plan to put addons and more in-depth examples in this repro in the future.

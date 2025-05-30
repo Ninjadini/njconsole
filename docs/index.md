@@ -1,6 +1,6 @@
-# Ninjadini Debug Console for Unity
+# Ninjadini Debug Console [NjConsole] for Unity
 
-NjConsole is the ultimate debug console you never knew you needed — until now.
+NjConsole is the ultimate debugger console you never knew you needed — until now.
 
 Built for speed, flexibility, and in-game power, it’s your all-in-one tool for logs, inspection, and runtime control — whether in the editor or in-player. Its modular, developer-friendly design makes it easy to bring your existing debug tools into the console.
 
@@ -24,7 +24,7 @@ NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in
     - 📱 App, device, and system info viewer
 - 🧱 Modular design — plug in your own modules and panels
 - 🧾 Source — Full C# code included
-- 📘 Documentation provided for all public APIs — includes C# XML comments and a Getting Started guide. Web documentation with latest tips and tricks also avaviable
+- 📘 Documentation provided for all public-facing APIs — includes C# XML comments and a Getting Started guide. Web documentation with latest tips and tricks also avaviable
 
 Whether you're debugging complex behavior, prototyping features, or tweaking values on the fly, NjConsole gives you full control over your game — in the editor or at runtime, on any platform.
 
@@ -32,6 +32,13 @@ Whether you're debugging complex behavior, prototyping features, or tweaking val
 
 Documentation list: 
 
-[Getting Started](GettingStarted.md)  
+[Console Window](consolewindow.md)  
+
+[Logging & Logs panel](logging.md)  
+
+[Options Menu / Cheats](optionsmenu.md)  
+
+
+[Getting Started PDF](GettingStarted.pdf)  
 
 More to come very soon
