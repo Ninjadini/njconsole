@@ -127,3 +127,6 @@ public class MathsAccessChallenge : IConsoleAccessChallenge, IConsoleExtension
     }
 }
 ```
+
+
+[NjConsole doc home](index.md)

@@ -73,3 +73,6 @@ Clicking the button opens the object in the inspector:
   
 > **⚠️ Limitations**  
 > While you can view and modify many fields and properties, not all data types are fully editable (yet).
+
+
+[NjConsole doc home](index.md)

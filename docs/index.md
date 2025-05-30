@@ -40,7 +40,6 @@ Documentation list:
 
 [Custom Panels](custompanels.md)  
 
+---
 
 [Getting Started PDF](GettingStarted.pdf)  
-
-More to come very soon

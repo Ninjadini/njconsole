@@ -247,3 +247,6 @@ Once you drop your first shortcut, you’ll enter shortcut edit mode:
 - ⚙️ Toggle Auto Show at Start to display shortcuts on game launch.
 - 🧠 Shortcuts sync with menu visibility — they appear/disappear as the linked options do.
 - 🫥 If you pressed `hide shortcuts`, use: Console > Options > Show Shortcuts to reopen edit mode.
+
+
+[NjConsole doc home](index.md)
