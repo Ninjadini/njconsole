@@ -19,7 +19,7 @@ You can customize these triggers in `Project Settings > Ninjadini ⌨ Console`.
 - On screens with at least 650px width or height, a window mode button appears at the end of the sidebar — allowing you to undock and resize the console overlay.
 
 
-## Setting up Access Challenge
+## 🔐 Setting up Access Challenge
 You can configure an access challenge to prevent unintended access to the console.
 1. Go to Project Settings → Ninjadini ⌨ Console → Playmode Overlay → Access Challenge
 2. Click `Add Access Challenge`
@@ -30,9 +30,9 @@ You can configure an access challenge to prevent unintended access to the consol
 
 <img src="images/accesspass.png" alt="Screenshot of Secret Pass Challenge" width=300>
 
-# Advanced topics
+# 🔧 Advanced topics
 
-## Auto start console
+## ⚡ Auto start console
 - Console overlay is set to auto start in play mode by default
 - If you have set up activation triggers (<code>`</code>key press or hold at corner) it will stay hidden till it is activated
 
@@ -41,7 +41,7 @@ To manually start the console overlay, call `NjConsole.Overlay.EnsureStarted()`
 This will start hidden if you have activation triggers set up.  
 If you want to force show the console overlay, call `NjConsole.Overlay.ShowWithAccessChallenge()`  
 
-## Setting up your own activation trigger
+## 🕹️ Setting up your own activation trigger
 You can have your own custom way to trigger the console overlay in play mode.  
 The default triggers are done via ConsoleKeyPressTrigger and ConsolePressAndHoldTrigger, you can refer to them as example.  
 
@@ -72,7 +72,7 @@ public class ShiftRightClickConsoleTrigger : IConsoleOverlayTrigger, IConsoleExt
 ```
 
 
-## Setting up your own custom access challenge type
+## 🔐 Setting up your own custom access challenge type
 You may want to set up your own access challenge, perhaps maybe tie it into your own login system.  
 
 1. Create a class that implements both IConsoleAccessChallenge and IConsoleExtension.  

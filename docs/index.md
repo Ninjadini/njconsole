@@ -2,8 +2,6 @@
 
 NjConsole is the ultimate debugger console you never knew you needed — until now.
 
-Built for speed, flexibility, and in-game power, it’s your all-in-one tool for logs, inspection, and runtime control — whether in the editor or in-player. Its modular, developer-friendly design makes it easy to bring your existing debug tools into the console.
-
 ⚠️ Unity 2022.3 or newer is required
 NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in 2022.3 LTS.
 
@@ -26,19 +24,23 @@ NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in
 - 🧾 Source — Full C# code included
 - 📘 Documentation provided for all public-facing APIs — includes C# XML comments and a Getting Started guide. Web documentation with latest tips and tricks also avaviable
 
-Whether you're debugging complex behavior, prototyping features, or tweaking values on the fly, NjConsole gives you full control over your game — in the editor or at runtime, on any platform.
 
 ---
 
-Documentation list: 
+## 🎬 Demo
+Please try provided Demo scene inside Demo folder.
 
-[Console Window](consolewindow.md)  
+## 📚 Documentation Topics
 
-[Logging & Logs panel](logging.md)  
+- [Console Window](consolewindow.md)  
 
-[Options Menu / Cheats](optionsmenu.md)  
+- [Logging & Logs panel](logging.md)  
 
-[Custom Panels](custompanels.md)  
+- [Options Menu / Cheats](optionsmenu.md)  
+
+- [Custom Panels](custompanels.md)  
+
+- [Build customization](buildcustomization.md)  
 
 ---
 

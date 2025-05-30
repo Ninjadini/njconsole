@@ -1,10 +1,12 @@
 
 # 📝 NjLogger & Logs panel
 
-Unlike Debug.Log, which allocates memory and produces expensive stack traces, NjLogger:
+## 📘 NjLogger basics
+NjLogger is a high-performance alternative to Debug.Log, designed to minimize overhead and integrate tightly with NjConsole.
+Compared to Debug.Log, which allocates memory and generates costly stack traces, NjLogger offers:
 - Avoids GC pressure with zero-allocation argument formatting
-- Integrates seamlessly with NjConsole (filtering, channels, object inspection)
-- Still captures logs from Debug.Log() to appear in NjConsole automatically
+- Seamless integration with NjConsole: supports filtering, channels, and object inspection
+- Automatic capture of logs from Debug.Log() — they’ll still appear in NjConsole without extra setup
 
 ```
 // These logs will appear in NjConsole with appropriate severity styling
@@ -74,5 +76,90 @@ Clicking the button opens the object in the inspector:
 > **⚠️ Limitations**  
 > While you can view and modify many fields and properties, not all data types are fully editable (yet).
 
+
+# 🔧 Advanced topics
+
+## 🔁 Sending Logs _To_ NjLogger from Your Own Logger
+
+- If your logger already forwards logs to Debug.Log(), **no extra setup is needed.**
+- Otherwise, the most efficient way is to call NjLogger.Add() directly from your logger:
+```
+NjLogger.Add(<message>, options: NjLogger.Options.Info /* or map your log level here */);
+```
+
+## 🔀 Sending Logs _From_ NjLogger to Your Own Logger
+
+To forward logs from `NjLogger` into your own logging system, implement and register a custom `NjLogger.IHandler`.
+```
+// Register once during initialization
+NjLogger.AddHandler(new MyLoggerBridge());
+
+public class MyLoggerBridge : NjLogger.IHandler {
+  public void HandleLog(ref NjLogger.LogRow logRow){
+    var message = logRow.GetString(LoggerUtils.TempStringBuilder);
+    var level = logRow.Level;
+    // Forward to your logger
+  }
+  public void HandleException(Exception exception, ref LogRow logRow){
+    var message = logRow.GetString(LoggerUtils.TempStringBuilder);
+    var level = logRow.Level;
+    // Forward exception to your logger
+  }
+}
+```
+> ⚠️ Only register your handler once. Multiple registrations will result in duplicate logs.
+
+
+## 🧵 Extracting Log Strings from NjLogger
+
+`NjLogger` stores logs in a rotating ring buffer, with the size controlled by `MaxHistoryCount` (set in Project Settings for Editor/Player).  
+
+To export logs (from newest to oldest) as a single string:
+```
+var stringBuilder = new StringBuilder();
+NjLogger.LogsHistory.GenerateHistoryNewestToOldest(stringBuilder);
+var logMessages = stringBuilder.ToString();
+```
+
+For finer control, you can iterate manually:
+```
+NjLogger.LogsHistory.ForEachLogNewestToOldest((log) =>
+{
+    var message = log.GetLineString();
+    var level = log.Level;
+    var time = log.Time;
+    var channelName = log.GetChannelName();
+    var channelTag = !string.IsNullOrEmpty(channelName) ? $" [{channelName}]" : "";
+    var formattedLogString = $"[{time:HH:mm:ss}] [{level}]{channelTag} {message}";
+
+    //Debug.Log(formattedLogString);
+});
+```
+If you need the other direction, use `ForEachLogOldestToNewest`
+
+
+
+## ⏱ Customize timestamp format in logs panel
+1. Create a class that implements both `IConsoleTimestampFormatter` and `IConsoleExtension`.
+2. Mark the class with the `[Serializable]` attribute.
+```
+[Serializable]
+public class MyCustomTimestampFormatter : IConsoleTimestampFormatter, IConsoleExtension
+{
+    public void AppendFormatted(LogLine log, StringBuilder stringBuilder)
+    {
+        var time = log.Time;
+        LoggerUtils.AppendNumWithZeroPadding(stringBuilder, time.Hour, 2);
+        stringBuilder.Append(":");
+        LoggerUtils.AppendNumWithZeroPadding(stringBuilder, time.Minute, 2);
+        stringBuilder.Append(":");
+        LoggerUtils.AppendNumWithZeroPadding(stringBuilder, time.Second, 2);
+    }
+}
+```
+3. In `Project Settings > NjConsole > Extension Modules`, add your new class to the list.
+4. Click `Apply Extension Changes` to reload.
+5. In the **Logs Panel**, click the **Time** dropdown (top-right), and select **Custom Module**.  
+Note. if you have multiple `IConsoleTimestampFormatter` modules added, it might not pick the right one.
 
 [NjConsole doc home](index.md)
