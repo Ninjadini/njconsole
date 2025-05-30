@@ -48,6 +48,7 @@ The default triggers are done via ConsoleKeyPressTrigger and ConsolePressAndHold
 1. Create a class that implements both IConsoleAccessChallenge and IConsoleExtension.  
 2. Add [Serializable] attribute to the class.  
 3. Go to `Project Settings > NjConsole > Playmode Overlay > Add Trigger` > add your new class   
+4. Press `Apply changes`
 Example code below toggles the overlay on shift + right mouse click.
 ```
 [System.Serializable]

@@ -38,6 +38,8 @@ Documentation list:
 
 [Options Menu / Cheats](optionsmenu.md)  
 
+[Custom Panels](custompanels.md)  
+
 
 [Getting Started PDF](GettingStarted.pdf)  
 
