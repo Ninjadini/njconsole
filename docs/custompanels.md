@@ -116,6 +116,7 @@ class MyUberEditorPanelElement : VisualElement
 # Lock editor console window to a single panel
 
 You may want to have multiple console windows open with each set to a specific panel for easy access.  
+This should allow you to migrate your existing editor tools to NjConsole panel while keeping the old way to access it.
 
 Here is how it looks:  
 <img src="images/lock-panel.png" alt="Screenshot of locking a panel to window">
@@ -132,14 +133,13 @@ public static void CreateUberPanel()
     }
 
     // Create and show the console editor window.
-    var window = EditorWindow.CreateWindow<NjConsoleEditorWindow>();
-    window.Show();
+    var window = NjConsoleEditorWindow.CreateWindow();
     
     // Set console panel to show MyUberEditorPanel
     window.Window.SetActivePanel<MyUberEditorPanel>();
     
     // lock to single panel (you can always unlock it from the window context menu - top right tripple dot)
-    window.SetLockedToSinglePanel(true); // or try (window.Window.SetLockedToSinglePanel(true))
+    window.SetLockedToSinglePanel(true);
 }
 ```
 

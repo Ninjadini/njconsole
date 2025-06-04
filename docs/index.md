@@ -1,6 +1,6 @@
 # Ninjadini Debug Console [NjConsole] for Unity
 
-NjConsole is the ultimate debugger console you never knew you needed — until now.
+NjConsole is the ultimate debug console you never knew you needed — until now.
 
 ⚠️ Unity 2022.3 or newer is required
 NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in 2022.3 LTS.
@@ -30,6 +30,7 @@ NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in
 ## 🎬 Demo
 Please try provided Demo scene inside Demo folder.
 
+
 ## 📚 Documentation Topics
 
 - [Console Window](consolewindow.md)  
@@ -44,4 +45,10 @@ Please try provided Demo scene inside Demo folder.
 
 ---
 
-[Getting Started PDF](GettingStarted.pdf)  
+[🚀 Getting Started PDF](GettingStarted.pdf)  
+
+
+[🛒 Unity Asset Store](https://u3d.as/3xye)
+
+
+[📽️ Video](https://www.youtube.com/watch?v=IIqtMWJkTIY)

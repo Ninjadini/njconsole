@@ -49,6 +49,7 @@ The default triggers are done via ConsoleKeyPressTrigger and ConsolePressAndHold
 2. Add [Serializable] attribute to the class.  
 3. Go to `Project Settings > NjConsole > Playmode Overlay > Add Trigger` > add your new class   
 4. Press `Apply changes`
+
 Example code below toggles the overlay on shift + right mouse click.
 ```
 [System.Serializable]
@@ -78,6 +79,7 @@ You may want to set up your own access challenge, perhaps maybe tie it into your
 1. Create a class that implements both IConsoleAccessChallenge and IConsoleExtension.  
 2. Add [Serializable] attribute to the class.  
 3. Go to `Project Settings > NjConsole > Playmode Overlay > Add Access Challenge` > add your new class  
+
 Example code below ask for a simple math question to answer before letting you go to console.
 ```
 [System.Serializable]
