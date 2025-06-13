@@ -8,7 +8,12 @@ using UnityEngine;
 
 /**
  * Console extension to control TimeScale via Keybinding and options menu
- * Add this extension via Project Settings > Ninjadini Console > Extension Modules > Add Extension Module
+ * 
+ * How to install:
+ * 1. Windows > Package Manager
+ * 2. Add > install from git URL > https://github.com/Ninjadini/njconsole.git?path=extension-modules/TimeScaleControl
+ * 3. Project Settings > Ninjadini Console > Extension Modules > Add Extension Module > select TimeScaleNjConsoleExtension
+ *
  * Default settings:
  * Options menu: Extensions > TimeScale > Ultra Slow / Slow / Normal / Fast / Ultra Fast
  * Key bindings:

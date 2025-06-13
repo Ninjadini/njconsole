@@ -1,0 +1,11 @@
+{
+  "name": "com.ninjadini.console.extensions.timescale",
+  "version": "1.0.0",
+  "unity": "2022.3",
+  "displayName": "TimeScale control NjConsole extension",
+  "description": "Console extension to control TimeScale via Keybinding and options menu",
+  "author": {
+    "name": "Ninjadini",
+    "url": "https://ninjadini.com"
+  }
+}
