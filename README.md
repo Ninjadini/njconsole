@@ -7,4 +7,5 @@ Rendered version of the docs can be found at
 
 Source `.md` files can be found in `docs/` folder.
 
-We plan to put addons and more in-depth examples in this repro in the future.
+We plan to put NjConsole's addons / extension modules inside `extension-modules`.  
+Documentation regarding these optional extensions will come soon, perhaps with next release.
