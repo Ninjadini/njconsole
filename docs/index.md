@@ -22,7 +22,9 @@ NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in
     - 📱 App, device, and system info viewer
 - 🧱 Modular design — plug in your own modules and panels
 - 🧾 Source — Full C# code included
-- 📘 Documentation provided for all public-facing APIs — includes C# XML comments and a Getting Started guide. Web documentation with latest tips and tricks also avaviable
+- 📚 Documentation provided for all public-facing APIs — includes C# XML comments and a Getting Started guide. Web documentation with latest tips and tricks also available
+
+
 ---
 
 ## 📚 Documentation Topics
@@ -47,8 +49,6 @@ Please also try the provided Demo scene inside Demo folder.
 
 [🚀 Getting Started PDF](GettingStarted.pdf)  
 
-
 [🛒 Unity Asset Store](https://assetstore.unity.com/packages/slug/319982)
-
 
 [📽️ Video](https://www.youtube.com/watch?v=IIqtMWJkTIY)
