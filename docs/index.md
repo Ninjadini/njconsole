@@ -37,6 +37,8 @@ NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in
 
 - [Build customization](buildcustomization.md)  
 
+- [Extension Modules](extensionmodules.md)
+
 Please also try the provided Demo scene inside Demo folder.
 
 ---
