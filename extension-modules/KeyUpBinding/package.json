@@ -1,0 +1,11 @@
+{
+  "name": "com.ninjadini.console.extensions.keyupbinding",
+  "version": "1.0.0",
+  "unity": "2022.3",
+  "displayName": "KeyUpBinding NjConsole extension",
+  "description": "NjConsole extension for Key Up Binding support",
+  "author": {
+    "name": "Ninjadini",
+    "url": "https://ninjadini.com"
+  }
+}
