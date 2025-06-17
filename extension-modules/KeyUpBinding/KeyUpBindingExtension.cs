@@ -6,6 +6,7 @@ namespace Ninjadini.Console.Extensions
 {
     /// <summary>
     /// NjConsole extension for Key Up Binding support
+    /// WARNING: This only works for old Input Manager. NOT new Input System.
     /// How to install (choose 1):
     /// a. Copy the source files to your project.
     /// b. Window > Package Manager > Add > install from git URL > https://github.com/Ninjadini/njconsole.git?path=extension-modules/KeyUpBinding
