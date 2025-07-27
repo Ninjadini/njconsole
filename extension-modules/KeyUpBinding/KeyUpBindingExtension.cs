@@ -20,6 +20,7 @@ namespace Ninjadini.Console.Extensions
     [Serializable]
     public class KeyUpBindingExtension : IConsoleExtension
     {
+#if !NJCONSOLE_DISABLE
         ConsoleOverlay _overlay;
         readonly Dictionary<(KeyCode, ConsoleKeyBindings.Modifier), Action> _upBinding = new();
 
@@ -68,6 +69,7 @@ namespace Ninjadini.Console.Extensions
         {
             UnBind(_upBinding, key, mods, requiredCallback);
         }
+        public void FindAndUnbindKeyUp(Action requiredCallback) { }
 
         void UnBind(Dictionary<(KeyCode, ConsoleKeyBindings.Modifier), Action> dict, KeyCode key, ConsoleKeyBindings.Modifier mods, Action requiredCallback = null)
         {
@@ -121,5 +123,13 @@ namespace Ninjadini.Console.Extensions
                     && ((mods & ConsoleKeyBindings.Modifier.Alt) != 0) == (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt))
                     && ((mods & ConsoleKeyBindings.Modifier.Cmd) != 0) == (Input.GetKey(KeyCode.LeftCommand) || Input.GetKey(KeyCode.RightCommand));
         }
+        
+#else
+        public void BindKeyUp(Action callback, KeyCode key, ConsoleKeyBindings.Modifier mods = default) { }
+        public bool IsBoundToKeyUp(KeyCode key, ConsoleKeyBindings.Modifier mods = default, Action requiredCallback = null) => false;
+        public void UnbindKeyUp(KeyCode key, ConsoleKeyBindings.Modifier mods, Action requiredCallback = null) { }
+        public void FindAndUnbindKeyUp(Action requiredCallback) { }
+#endif
+        
     }
 }

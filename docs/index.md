@@ -2,14 +2,11 @@
 
 NjConsole is the ultimate debug console you never knew you needed — until now.
 
-⚠️ Unity 2022.3 or newer is required
-NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in 2022.3 LTS.
-
 - 📜 Runtime log viewer with powerful filtering and search (AND, OR, NOT, etc.)
 - ⚡ Ultra-fast logging with near-zero allocations for high-performance debugging
-- 🧩 Object inspector — view/edit fields and properties, follow references, and call methods directly
-- 📜 Log entries can link to objects — tap to inspect and tweak them instantly
-- 🧭 Hierarchy viewer — browse live GameObjects and their components, then inspect them in detail using the object inspector
+- 🔍 Object inspector — view/edit fields and properties, follow references, and call methods directly
+- 🔗 Log entries can link to objects — tap to inspect and tweak them instantly
+- 📂 Hierarchy viewer — browse live GameObjects and their components, then inspect them in detail using the object inspector
 - 🎮 Custom menu options and keybindings — for cheats, dev tools, and prototyping
 - 🎯 Quick-access shortcuts — assign to any screen corner for rapid access while testing
 - 🖥️ Cross-platform support — works in Unity Editor, standalone, WebGL, and mobile (supports safe areas, touch input, keyboard, and all orientations)
@@ -21,9 +18,14 @@ NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in
     - 📺 Real-time control of Screen and QualitySettings for tuning visuals on the fly
     - 📱 App, device, and system info viewer
 - 🧱 Modular design — plug in your own modules and panels
+- ✂️ Removable — Easily disable NjConsole at compile-time with `#ifdef NJCONSOLE_DISABLE` (saves memory, reduces build size, and prevents unintended access in production)
 - 🧾 Source — Full C# code included
 - 📚 Documentation provided for all public-facing APIs — includes C# XML comments and a Getting Started guide. Web documentation with latest tips and tricks also available
 
+⚠️ Unity 2022.3 or newer is required
+NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in 2022.3 LTS.
+
+🏷️ Latest version: 1.1.0
 
 ---
 
@@ -52,3 +54,11 @@ Please also try the provided Demo scene inside Demo folder.
 [🛒 Unity Asset Store](https://assetstore.unity.com/packages/slug/319982)
 
 [📽️ Video](https://www.youtube.com/watch?v=IIqtMWJkTIY)
+
+[📝 Change Log](CHANGELOG.md)
+
+---
+
+### 🔒 License
+Licensed under [Unity Asset Store EULA](https://unity.com/legal/as-terms) as an Extension Asset.    
+Per the Extension Asset license, this asset is sold on a per-seat basis — one license is required for each individual user.     
