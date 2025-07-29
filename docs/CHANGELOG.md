@@ -12,3 +12,6 @@
 
 ## 1.0.0
 🚀 Our first version 🎉
+
+---
+[NjConsole doc home](index.md)

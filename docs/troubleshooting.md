@@ -17,3 +17,7 @@ Key bindings are disabled by default outside Editor, you can enable it from Proj
 ### Overlay UI scale looks wrong in Play Mode
 Unfortunately, this can happen when Unity’s Game View scaling (especially with high-DPI displays) doesn’t play nicely with UI Toolkit’s resolution scaling in certain setups.
 You can manually fix it during Play Mode by opening the NjConsole overlay and adjusting the scale: `Utilities > Tools > UI Scale + / -`
+
+
+---
+[NjConsole doc home](index.md)
