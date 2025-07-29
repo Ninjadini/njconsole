@@ -12,15 +12,10 @@ NjConsole is the ultimate debug console you never knew you needed — until now.
 - 🖥️ Cross-platform support — works in Unity Editor, standalone, WebGL, and mobile (supports safe areas, touch input, keyboard, and all orientations)
 - 🖼️ Dockable editor window and in-game floating overlay for large screens
 - 🚀 Plug-and-play setup — NjConsole starts automatically. No configuration required.
-- 🧰 Built-in utilities, including:
-    - 🎯 FPS and memory monitors
-    - 🛠️ PlayerPrefs debugger
-    - 📺 Real-time control of Screen and QualitySettings for tuning visuals on the fly
-    - 📱 App, device, and system info viewer
+- 🧰 Built-in utilities — FPS/memory monitors, PlayerPrefs viewer, runtime visual tuning, and device info.
 - 🧱 Modular design — plug in your own modules and panels
-- ✂️ Removable — Easily disable NjConsole at compile-time with `#ifdef NJCONSOLE_DISABLE` (saves memory, reduces build size, and prevents unintended access in production)
-- 🧾 Source — Full C# code included
-- 📚 Documentation provided for all public-facing APIs — includes C# XML comments and a Getting Started guide. Web documentation with latest tips and tricks also available
+- ✂️ Removable — Easily disable NjConsole at compile-time (saves memory, build size, and prevents unintended access)
+- 🧾 Full C# source with XML-documented public APIs.
 
 ⚠️ Unity 2022.3 or newer is required
 NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in 2022.3 LTS.
@@ -56,6 +51,8 @@ Please also try the provided Demo scene inside Demo folder.
 [📽️ Video](https://www.youtube.com/watch?v=IIqtMWJkTIY)
 
 [📝 Change Log](CHANGELOG.md)
+
+[🧯 Troubleshooting & Known Issues](troubleshooting.md)
 
 ---
 
