@@ -1,3 +1,7 @@
+## 1.1.1
+🐛 Fixed compile error when NjConsole is disabled with warnings-as-errors enabled.
+🐛 Fixed type search in Object Inspector not working in WebGL.
+
 ## 1.1.0
 🆕 Option to disable and strip NjConsole using #ifdef NJCONSOLE_DISABLE. Can also be toggled via Project Settings or API.   
 🆕 Stack traces are now clickable line by line — click any line in a stack trace (e.g. the third line) to jump to that method in your IDE.   
