@@ -19,6 +19,9 @@ void Start()
         // If 'this' is a MonoBehaviour, options will auto-remove when `OnDestroy()`
 }
 ```
+> ⚠️ To add static members, you need to pass the type instead.   
+> `NjConsole.Options.CreateCatalogFrom(typeof(DemoNjConsole));`   
+> The separation exists because the static nature means it can persist without having an instance alive.   
 
 ### 🔘 Buttons
 ```
@@ -100,6 +103,24 @@ void SaySomething(string receivedText)
 [ConsoleOption]
 DeviceOrientation preferredOrientation;
 ```
+
+### ⚠️ Command Line fallback for unsupported options
+Members marked with `[ConsoleOption]` that the Options Menu can’t render are hidden (e.g. requiring multiple parameters or use unsupported types).   
+Hidden options are still callable via the Command Line.   
+A notice like “3 hidden item(s)” and a button to open Command Line will display.   
+Example:
+```
+[ConsoleOption("Demo/Introduce")]
+void IntroduceFromPerson(string name, int age)
+{
+    Debug.Log($"Hello, my name is {name}. I am {age} years old.");
+}
+```
+Call from Command Line:
+```
+demo/introduce "Ninjadini" 30
+```
+See [Command Line](commandline.md) for more details. 
 
 ---
 

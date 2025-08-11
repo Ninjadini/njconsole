@@ -8,6 +8,7 @@ NjConsole is the ultimate debug console you never knew you needed — until now.
 - 🔗 Log entries can link to objects — tap to inspect and tweak them instantly
 - 📂 Hierarchy viewer — browse live GameObjects and their components, then inspect them in detail using the object inspector
 - 🎮 Custom menu options and keybindings — for cheats, dev tools, and prototyping
+- ⌨️ Command Line — To call menu options. With commands history, autocompletion and multi-params support.
 - 🎯 Quick-access shortcuts — assign to any screen corner for rapid access while testing
 - 🖥️ Cross-platform support — works in Unity Editor, standalone, WebGL, and mobile (supports safe areas, touch input, keyboard, and all orientations)
 - 🖼️ Dockable editor window and in-game floating overlay for large screens
@@ -20,7 +21,7 @@ NjConsole is the ultimate debug console you never knew you needed — until now.
 ⚠️ Unity 2022.3 or newer is required
 NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in 2022.3 LTS.
 
-🏷️ Latest version: 1.1.1
+🏷️ Latest version: 1.2.0
 
 ---
 
@@ -30,7 +31,9 @@ NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in
 
 - [Logging & Logs panel](logging.md)  
 
-- [Options Menu / Cheats](optionsmenu.md)  
+- [Options Menu / Cheats](optionsmenu.md)
+
+- [Command Line](commandline.md)
 
 - [Custom Panels](custompanels.md)  
 
