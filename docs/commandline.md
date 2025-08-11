@@ -36,7 +36,7 @@ Example: `/help` lists all commands.
 **String** params can be wrapped in quotes (`"`) to include spaces or commas. Escape `"` with `\"`. 
 
 **Notes:**
-- Command names are case-insensitive. Conflicts in casing will show in `/help` but may not execute correctly.
+- Command names are case-insensitive. Conflicts in casing will show in autocomplete suggestions but may not execute correctly.
 - Names can contain spaces; `/` creates grouped folders, like in the Options Menu.
 - Method overloads are **not** supported. Each command must be unique — add a suffix to avoid collisions.
 
@@ -50,20 +50,20 @@ void SayHello() {
     Debug.Log("Hello");
 }
 ```
-Call: `sayhello`
+Command: `sayhello`
 
 ```csharp
 [ConsoleOption("profile/name")]
 public string Name;
 ```
-Get: `profile/name`   
-Set: `profile/name "My name here"`
+Get Command: `profile/name`   
+Set Command: `profile/name "My name here"`
 
 ```csharp
 [ConsoleOption("demo/introduce")]
 void IntroducePerson(string name, int age) { ... }
 ```
-Call: `demo/introduce Ninjadini 30`   
+Command: `demo/introduce Ninjadini 30`   
 or `demo/introduce "Ninjadini", 30`
 
 ---
@@ -75,7 +75,7 @@ If a parameter is an object that requires constructor arguments, group them in p
 [ConsoleOption("math / vector multiply")]
 static Vector3 MultiplyV(Vector3 a, float b) => a * b;
 ```
-Call: `math/vector multiply (1 2 3) 1`   
+Command: `math/vector multiply (1 2 3) 1`   
 or `math/vector multiply (1,2,3),1`   
 
 **Nested constructors:**
@@ -92,7 +92,7 @@ struct PositionAndSize {
     }
 }
 ```
-Call: `nestedConstructor ((1, 2, 3), 3), "hello there"`
+Command: `nestedConstructor ((1, 2, 3), 3), "hello there"`
 
 ---
 
@@ -102,7 +102,7 @@ Call: `nestedConstructor ((1, 2, 3), 3), "hello there"`
 [ConsoleOption("profiles/GetUserId")]
 string GetUserId() { ... }
 ```
-Call: `profiles/getuserid`   
+Command: `profiles/getuserid`   
 Output: `> ‘UserId1234’` < the returned string from GetUserId method.   
 
 Returned objects are stored in `$_` and can be reused:
@@ -110,7 +110,7 @@ Returned objects are stored in `$_` and can be reused:
 [ConsoleOption("profiles/GetProfile")]
 PlayerProfile GetProfile(string id) { ... }
 ```
-Call: `profiles/getprofile $_`   
+Command: `profiles/getprofile $_`   
 Output: `> PlayerProfile; Scope $@ set.`
 
 > ℹ️ If a command returns a null object, the returned object variable `$_` will not change.
@@ -126,8 +126,8 @@ Output: `> PlayerProfile; Scope $@ set.`
 [ConsoleOption("profiles/loadprofile")]
 void LoadProfile(PlayerProfile value) { ... }
 
-Call: /store profile
-Call: profiles/loadprofile $profile
+Command: /store profile
+Command: profiles/loadprofile $profile
 Output: `> PlayerProfile; Scope $@ set.`
 ```
 

@@ -139,6 +139,10 @@ void Start()
         // If 'this' is a MonoBehaviour, options will auto-remove when `OnDestroy()`
 }
 ```
+> ⚠️ To add static members, you need to pass the type instead.   
+> `NjConsole.Options.CreateCatalogFrom(typeof(DemoNjConsole));`   
+> The separation exists because the static nature means it can persist without having an instance alive.
+
 
 ### 🔘 Buttons
 ```
@@ -220,6 +224,13 @@ void SaySomething(string receivedText)
 [ConsoleOption]
 DeviceOrientation preferredOrientation;
 ```
+
+### ⚠️ Command Line fallback for unsupported options
+Members marked with `[ConsoleOption]` that the Options Menu can’t render are hidden (e.g. requiring multiple parameters or use unsupported types).   
+Hidden options are still callable via the Command Line.   
+A notice like “3 hidden item(s)” and a button to open Command Line will display.   
+See [online documentation](https://ninjadini.github.io/njconsole/) more details about Command Line.
+
 
 ---
 
@@ -370,6 +381,96 @@ Once you drop your first shortcut, you’ll enter shortcut edit mode:
 
 <div class="page" />
 
+## 🎯 Command Line
+
+NjConsole’s Command Line lets you run user-defined and built-in commands through text input.
+
+Commands are registered the same way as the **Options Menu** (via `[ConsoleOption]` or programmatically).  
+
+## ▶️ Basic Usage
+
+- **Show Command Line**: Press any key while focused on the Logs panel.
+- **Autocomplete**: Suggestions appear as you type.
+    - `Tab` accepts the first suggestion.
+    - `Shift+↑` / `Shift+↓` to navigate suggestions, `Tab` or `Enter` to accept.
+- **History**: `↑` / `↓` cycles through previous commands.
+- **Hide**: `Esc` closes the Command Line.
+
+### 📱 On Mobile (no physical keyboard)
+
+- Tap the **Logs** button again to show the Command Line.
+- The input field uses a text-prompt style with autocomplete.
+- Tap the `⌨` button to toggle between prompt and normal input.
+
+---
+
+## 🔤 Command Structure & Syntax
+
+```
+<command> <parameters seperated by space ` ` or comma `,`>
+```
+
+**Built-in commands** appear under `/`.   
+Example: `/help` lists all commands.   
+**String** params can be wrapped in quotes (`"`) to include spaces or commas. Escape `"` with `\"`. 
+
+**Notes:**
+- Command names are case-insensitive. Conflicts in casing will show in autocomplete suggestions but may not execute correctly.
+- Names can contain spaces; `/` creates grouped folders, like in the Options Menu.
+- Method overloads are **not** supported. Each command must be unique — add a suffix to avoid collisions.
+
+<div class="page" />
+
+## 💡 Command Line Examples
+
+```csharp
+[ConsoleOption]
+void SayHello() {
+    Debug.Log("Hello");
+}
+```
+Command: `sayhello`
+
+```csharp
+[ConsoleOption("profile/name")]
+public string Name;
+```
+Get Command: `profile/name`   
+Set Command: `profile/name "My name here"`
+
+```csharp
+[ConsoleOption("demo/introduce")]
+void IntroducePerson(string name, int age) { ... }
+```
+Command: `demo/introduce Ninjadini 30`   
+or `demo/introduce "Ninjadini", 30`
+
+---
+
+## 🏗️ Advanced Parameters - Constructor Arguments
+
+If a parameter is an object that requires constructor arguments, group them in parentheses:  
+```csharp
+[ConsoleOption("math / vector multiply")]
+static Vector3 MultiplyV(Vector3 a, float b) => a * b;
+```
+Command: `math/vector multiply (1 2 3) 1`   
+or `math/vector multiply (1,2,3),1`   
+
+**For other topics about Command Line such as:**
+- Nested constructors
+- Return Values
+- Storage commands / $ variables
+- Scopes
+- Accessing Logged & Hierarchy Objects
+- Separating Command Catalogs
+- Input Prompt Takeover
+- Adding a Custom Executor
+
+Please see [online documentation](https://ninjadini.github.io/njconsole/).
+
+<div class="page" />
+
 
 
 
@@ -381,6 +482,7 @@ Once you drop your first shortcut, you’ll enter shortcut edit mode:
 
 📘 For advanced topics such as:
 - Creating custom modules and panels
+- Advanced Command Line features
 - Building editor-bound options menus
 - Accessing log history and writing custom log handlers
 - Customizing log timestamp formats
