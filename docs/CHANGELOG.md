@@ -1,5 +1,5 @@
 ## 1.2.0
-🆕 Command Line Support: Using the same paths as Option Menus. With commands history, autocompletion, multi-params support. Please see online doc for details.   
+🆕 Command Line Support: Using the same paths as Option Menus. With commands history, autocompletion, multi-params support, variables & scopes. Please see online doc for details.   
 ✨ Log details text view now detects file paths and adds buttons to locate the file.   
 ✨ Static members can now be added to Option Menus by passing the type object, e.g. `CreateCatalogFrom(typeof(MyConsoleMenus)`.   
 ✨ New setting to pipe logs from Unity into the `unity` channel.   

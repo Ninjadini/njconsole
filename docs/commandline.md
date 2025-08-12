@@ -183,11 +183,11 @@ var scope = storage.GetScope();     // same as `storage.GetStored("@")`
 var customVar = storage.GetStored("profile");   // if you called `/store profile`
 ```
 
-> Returned objects, scopes and other stored $ variables will be strong referenced and will not be garbage collected.
+> Returned objects, scopes and other stored $ variables will be strong referenced and will not be garbage collected.   
 > Call `/clear stored` to clear everything.
 
 ## 🖇️ Custom Command Line Handling (Input Prompt Takeover)
-If a command returns an IConsoleCommandlineModule, the Command Line switches into a locked mode, where all subsequent input is routed only to that module until it releases control.
+If a command returns an IConsoleCommandlineModule, the Command Line switches into a locked mode, where the next input is routed to that module.
 This is useful for creating interactive prompts, multi-step wizards, or temporary modes.
 ```
 [ConsoleOption("food prompt")]
@@ -249,7 +249,7 @@ public class DemoFoodPromptHandler : IConsoleCommandlineModule, IConsoleExtensio
     }
 }
 ```
-Your custom executor is evaluated before the default Command Line, except that `/` commands always take priority.
+Your custom executor is evaluated before the default Command Line, except that `/` commands always take priority.   
 If `TryRun()` returns `false`, NjConsole passes the input to the next enabled Command Line Module.
 
 [NjConsole doc home](index.md)
