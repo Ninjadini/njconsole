@@ -51,7 +51,7 @@ Please also try the provided Demo scene inside Demo folder.
 
 [🛒 Unity Asset Store](https://assetstore.unity.com/packages/slug/319982)
 
-[📽️ Video](https://www.youtube.com/watch?v=IIqtMWJkTIY)
+[📽️ Video](https://www.youtube.com/watch?v=J_qv3g_NY3U)
 
 [📝 Change Log](CHANGELOG.md)
 
