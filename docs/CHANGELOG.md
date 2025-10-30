@@ -1,3 +1,11 @@
+## 1.2.1
+✨ Custom log colors: Pass a color as the first parameter of a log to easily color the log text.   
+✨ Right-click to pin: Right-click any log to pin it. Pinned logs remain visible regardless of filters (search, channel, or priority).   
+✨ Custom stack trace skipping: Add your own frame-skipping logic via `ConsoleEditorBridge.CustomStackTraceFrameSkip`.  
+🐛 Improved to stick to bottom of log scroll better when resizing etc.
+🐛 Fixed compile errors not always showing in NjConsole.
+🐛 Fixed inspector input issue where number inputs were blocked by the command line UI.  
+
 ## 1.2.0
 🆕 Command Line Support: Using the same paths as Option Menus. With commands history, autocompletion, multi-params support, variables & scopes. Please see online doc for details.   
 ✨ Log details text view now detects file paths and adds buttons to locate the file.   

@@ -31,6 +31,8 @@ static readonly LogChannel channel = new LogChannel("myChannel");
 channel.Info("A log in `myChannel`");
 channel.Warn("A warning in `myChannel`");
 
+NjLogger.Info(Color.cyan, "Passing a Unity Color as the first param will auto color the log to that color.");
+
 // Unity's native logs still show up in NjConsole
 Debug.Log("Logs from Unity’s Debug.Log() automatically appear in NjConsole");
 ```
@@ -53,6 +55,7 @@ NjConsole provides powerful filtering options to help you focus on the logs that
 - 🚦 **Log Levels**
   - Filter logs by severity: Info, Warn, Error
 
+📍 Right-click any log to pin it. Pinned logs remain visible regardless of filters.
 
 ## 🔗 Logs object linking
 You can include object references directly in your logs.  
@@ -85,6 +88,9 @@ Clicking the button opens the object in the inspector:
 - Otherwise, the most efficient way is to call NjLogger.Add() directly from your logger:
 ```
 NjLogger.Add(<message>, options: NjLogger.Options.Info /* or map your log level here */);
+
+// Optionally, add custom stack trace skipping logic so your wrapper code is ignored when going to the IDE source code.
+ConsoleEditorBridge.CustomStackTraceFrameSkip = (..) => { ... }
 ```
 
 ## 🔀 Sending Logs _From_ NjLogger to Your Own Logger

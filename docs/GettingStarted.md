@@ -62,6 +62,8 @@ static readonly LogChannel channel = new LogChannel("myChannel");
 channel.Info("A log in `myChannel`");
 channel.Warn("A warning in `myChannel`");
 
+NjLogger.Info(Color.cyan, "Passing a Unity Color as the first param will auto color the log to that color.");
+
 // Unity's native logs still show up in NjConsole
 Debug.Log("Logs from Unity’s Debug.Log() automatically appear in NjConsole");
 ```
@@ -84,6 +86,7 @@ NjConsole provides powerful filtering options to help you focus on the logs that
 - 🚦 **Log Levels**
   - Filter logs by severity: Info, Warn, Error
 
+📍 Right-click any log to pin it. Pinned logs remain visible regardless of filters.
 
 ## 🔗 Logs object linking
 You can include object references directly in your logs.  

@@ -45,7 +45,7 @@ Example: `/help` lists all commands.
 ## 💡 Examples
 
 ```csharp
-[ConsoleOption]
+[ConsoleOption] 
 void SayHello() {
     Debug.Log("Hello");
 }
@@ -54,6 +54,7 @@ Command: `sayhello`
 
 ```csharp
 [ConsoleOption("profile/name")]
+[Tooltip("Get or set user profile name")] // shows as hint text
 public string Name;
 ```
 Get Command: `profile/name`   
