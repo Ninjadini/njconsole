@@ -86,6 +86,7 @@ Clicking the button opens the object in the inspector:
 
 - If your logger already forwards logs to Debug.Log(), **no extra setup is needed.**
 - Otherwise, the most efficient way is to call NjLogger.Add() directly from your logger:
+
 ```
 NjLogger.Add(<message>, options: NjLogger.Options.Info /* or map your log level here */);
 

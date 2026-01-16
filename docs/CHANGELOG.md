@@ -1,10 +1,10 @@
 ## 1.2.1
 ✨ Custom log colors: Pass a color as the first parameter of a log to easily color the log text.   
 ✨ Right-click to pin: Right-click any log to pin it. Pinned logs remain visible regardless of filters (search, channel, or priority).   
-✨ Custom stack trace skipping: Add your own frame-skipping logic via `ConsoleEditorBridge.CustomStackTraceFrameSkip`.  
-🐛 Improved to stick to bottom of log scroll better when resizing etc.
-🐛 Fixed compile errors not always showing in NjConsole.
-🐛 Fixed inspector input issue where number inputs were blocked by the command line UI.  
+✨ Custom stack trace skipping: Add your own frame-skipping logic via `ConsoleEditorBridge.CustomStackTraceFrameSkip`.   
+🐛 Improved to stick to bottom of log scroll better when resizing etc.   
+🐛 Fixed compile errors not always showing in NjConsole.   
+🐛 Fixed inspector input issue where number inputs were blocked by the command line UI.
 
 ## 1.2.0
 🆕 Command Line Support: Using the same paths as Option Menus. With commands history, autocompletion, multi-params support, variables & scopes. Please see online doc for details.   
@@ -13,7 +13,7 @@
 ✨ New setting to pipe logs from Unity into the `unity` channel.   
 
 ## 1.1.1
-🐛 Fixed compile error when NjConsole is disabled with warnings-as-errors enabled.
+🐛 Fixed compile error when NjConsole is disabled with warnings-as-errors enabled.   
 🐛 Fixed type search in Object Inspector not working in WebGL.
 
 ## 1.1.0
