@@ -21,7 +21,7 @@ NjConsole is the ultimate debug console you never knew you needed — until now.
 ⚠️ Unity 2022.3 or newer is required
 NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in 2022.3 LTS.
 
-🏷️ Latest version: 1.2.1
+🏷️ Latest version: 1.2.2
 
 ---
 

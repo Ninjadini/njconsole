@@ -89,10 +89,17 @@ Clicking the button opens the object in the inspector:
 
 ```
 NjLogger.Add(<message>, options: NjLogger.Options.Info /* or map your log level here */);
-
-// Optionally, add custom stack trace skipping logic so your wrapper code is ignored when going to the IDE source code.
-ConsoleEditorBridge.CustomStackTraceFrameSkip = (..) => { ... }
 ```
+ 
+> 💡Provide custom stack trace skipping to hide log wrapper frames. 
+> ```
+> ConsoleContext.CustomStackTraceFrameSkip = (frame) => {
+>    return frame.Name?.Contains("MyLogger.Log") == true
+>           ? ConsoleContext.IEditorBridge.StackSkipType.SkipEarly
+>           : ConsoleContext.IEditorBridge.StackSkipType.DoNotSkip;
+> };
+> ```
+
 
 ## 🔀 Sending Logs _From_ NjLogger to Your Own Logger
 
