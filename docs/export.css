@@ -45,7 +45,7 @@ html, body {
   font-size: 15px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 a {
@@ -108,7 +108,7 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 }
 
 .logo-title {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--text-white);
   letter-spacing: 0.02em;
