@@ -1,4 +1,11 @@
-## 1.2.2 
+---
+title: Changelog
+nav_section: "Advanced"
+nav_order: 4
+nav_icon: "📋"
+---
+
+## 1.2.2
 ✨ Lots of UX improvements:   
 &nbsp; ▸ Clicking an error log at the top now opens in full details view   
 &nbsp; ▸ Select multiple log rows and Ctrl+C to copy   

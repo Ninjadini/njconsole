@@ -1,3 +1,10 @@
+---
+title: Options Menu / Cheats
+nav_section: "Features"
+nav_order: 2
+nav_icon: "🎮"
+---
+
 # 🛠️ Options Menu / Cheats
 
 You can build interactive menus for in-game tools, debug settings, or cheat features — great for prototyping or QA workflows.

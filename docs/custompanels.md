@@ -1,3 +1,10 @@
+---
+title: Custom Panels
+nav_section: "Features"
+nav_order: 4
+nav_icon: "🧩"
+---
+
 # Add custom panel (UIToolkit format)
 
 A demo panel code:

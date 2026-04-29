@@ -1,3 +1,10 @@
+---
+title: Console Window
+nav_section: "Getting Started"
+nav_order: 2
+nav_icon: "🖥️"
+---
+
 # Console Window
 
 

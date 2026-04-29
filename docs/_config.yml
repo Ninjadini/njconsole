@@ -1,3 +1,11 @@
 title: NjConsole Docs
 description: Documentation for Ninjadini debug Console for Unity
 show_downloads: false
+version: "1.2.2"
+
+# Use our custom dark layout for all pages
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"

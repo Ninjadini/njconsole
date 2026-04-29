@@ -1,3 +1,10 @@
+---
+title: Command Line
+nav_section: "Features"
+nav_order: 3
+nav_icon: "⌨️"
+---
+
 # 💻️ Command Line
 
 NjConsole’s Command Line lets you run user-defined and built-in commands through text input.

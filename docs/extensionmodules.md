@@ -1,3 +1,10 @@
+---
+title: Extension Modules
+nav_section: "Advanced"
+nav_order: 2
+nav_icon: "🧱"
+---
+
 # 🧱 Extension Modules / Addons
 
 Extensions provide a simple way to build plug-and-play modules for NjConsole, allowing your features to be easily integrated into different projects or shared within the community.

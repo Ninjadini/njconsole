@@ -1,3 +1,9 @@
+---
+title: Troubleshooting
+nav_section: "Advanced"
+nav_order: 3
+nav_icon: "🧯"
+---
 
 # ⚠️ Known Issues
 🅰️  JetBrainsMono font may render certain letter pairs joined (e.g. xc, ex, ye, Sc).   

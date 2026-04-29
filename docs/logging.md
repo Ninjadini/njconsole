@@ -1,3 +1,9 @@
+---
+title: Logging & Logs Panel
+nav_section: "Features"
+nav_order: 1
+nav_icon: "📝"
+---
 
 # 📝 NjLogger & Logs panel
 

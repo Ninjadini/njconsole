@@ -1,3 +1,9 @@
+---
+title: Build Customization
+nav_section: "Advanced"
+nav_order: 1
+nav_icon: "🔧"
+---
 
 # 💻 Build customization
 

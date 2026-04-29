@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="stylesheet" href="{{ '/export.css' | relative_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <a href="{{ '/' | relative_url }}" class="logo">
+          <span class="logo-icon">⌨</span>
+          <div>
+            <div class="logo-title">NjConsole</div>
+            <div class="logo-sub">Documentation</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="sidebar-nav">
+        {% assign nav_sections = "Getting Started,Features,Advanced" | split: "," %}
+        {% assign nav_pages = site.pages | where_exp: "p", "p.nav_section" | sort: "nav_order" %}
+
+        {% for section in nav_sections %}
+          <div class="nav-section-label">{{ section }}</div>
+          {% for p in nav_pages %}
+            {% if p.nav_section == section %}
+              <a href="{{ p.url | relative_url }}" class="nav-link {% if page.url == p.url %}active{% endif %}">
+                <span class="nav-icon">{{ p.nav_icon }}</span> {{ p.nav_title | default: p.title }}
+              </a>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+
+        <div class="nav-section-label">Links</div>
+        <a href="{{ '/' | relative_url }}#-license" class="nav-link">
+          <span class="nav-icon">🔒</span> License
+        </a>
+        <a href="https://njconsole.ninjadini.com/demo/" class="nav-link external" target="_blank">
+          <span class="nav-icon">🌐</span> Live Demo
+        </a>
+        <a href="https://assetstore.unity.com/packages/slug/319982" class="nav-link external" target="_blank">
+          <span class="nav-icon">🛒</span> Asset Store
+        </a>
+        <a href="https://www.youtube.com/watch?v=J_qv3g_NY3U" class="nav-link external" target="_blank">
+          <span class="nav-icon">📽️</span> Video
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="version-badge">v{{ site.version }}</div>
+        <div class="made-by">by Ninjadini</div>
+      </div>
+    </nav>
+
+    <!-- Mobile header -->
+    <header class="mobile-header">
+      <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+      <a href="{{ '/' | relative_url }}" class="mobile-logo">⌨ NjConsole</a>
+    </header>
+
+    <!-- Main content -->
+    <main class="content">
+      <div class="content-inner">
+        {{ content }}
+      </div>
+      <footer class="page-footer">
+        <a href="https://assetstore.unity.com/packages/slug/319982" target="_blank">Unity Asset Store</a>
+        <span class="sep">·</span>
+        <a href="https://njconsole.ninjadini.com/demo/" target="_blank">Live Demo</a>
+        <span class="sep">·</span>
+        <span>© Ninjadini</span>
+      </footer>
+    </main>
+
+  </div>
+
+  <script>
+    // Close sidebar on outside click (mobile)
+    document.addEventListener('click', function(e) {
+      var sidebar = document.querySelector('.sidebar');
+      if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && !e.target.closest('.menu-toggle')) {
+        sidebar.classList.remove('open');
+      }
+    });
+  </script>
+
+</body>
+</html>
