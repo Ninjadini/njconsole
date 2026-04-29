@@ -1,7 +1,7 @@
 ---
 title: Command Line
-nav_section: "Features"
-nav_order: 3
+nav_section: "Core"
+nav_order: 4
 nav_icon: "⌨️"
 ---
 

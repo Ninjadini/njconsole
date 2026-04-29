@@ -1,7 +1,7 @@
 ---
 title: Options Menu / Cheats
-nav_section: "Features"
-nav_order: 2
+nav_section: "Core"
+nav_order: 3
 nav_icon: "🎮"
 ---
 

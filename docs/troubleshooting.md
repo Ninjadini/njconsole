@@ -1,7 +1,7 @@
 ---
 title: Troubleshooting
 nav_section: "Advanced"
-nav_order: 3
+nav_order: 8
 nav_icon: "🧯"
 ---
 

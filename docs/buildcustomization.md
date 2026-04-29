@@ -1,7 +1,7 @@
 ---
 title: Build Customization
 nav_section: "Advanced"
-nav_order: 1
+nav_order: 6
 nav_icon: "🔧"
 ---
 

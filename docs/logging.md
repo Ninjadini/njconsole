@@ -1,7 +1,7 @@
 ---
 title: Logging & Logs Panel
-nav_section: "Features"
-nav_order: 1
+nav_section: "Core"
+nav_order: 2
 nav_icon: "📝"
 ---
 

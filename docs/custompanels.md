@@ -1,7 +1,7 @@
 ---
 title: Custom Panels
-nav_section: "Features"
-nav_order: 4
+nav_section: "Advanced"
+nav_order: 5
 nav_icon: "🧩"
 ---
 
