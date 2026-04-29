@@ -457,6 +457,12 @@ img {
 
   .content-inner {
     max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  pre {
+    max-width: calc(100vw - 40px);
+    box-sizing: border-box;
   }
 
   .sidebar {
