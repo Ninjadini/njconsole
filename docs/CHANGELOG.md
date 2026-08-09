@@ -5,6 +5,15 @@ nav_order: 9
 nav_icon: "📋"
 ---
 
+## 1.2.3
+🆕 `Options.Repeating`: log the same content repeatedly and it replaces the previous line instead of spamming the log. - Useful for e.g. progress bars. 
+✨ Select log rows and press Ctrl/Cmd+Shift+C to copy them including their stack traces (Ctrl/Cmd+C alone copies without).   
+✨ Stack trace improvements: separate min-level settings for Release vs Development Builds.   
+✨ Log details now explains when a log has no stack trace due to level filtering.   
+⚠️ API Change: `NjLogger.SetMinSetTraceLevel()` replaced with `NjLogger.MinStackTraceLevel` property.   
+🐛 Fixed warnings due to API deprecation in Unity 6.4/6.5.   
+🐛 Various logs history and number formatting fixes.
+
 ## 1.2.2
 ✨ Lots of UX improvements:   
 &nbsp; ▸ Clicking an error log at the top now opens in full details view   
