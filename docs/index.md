@@ -1,3 +1,10 @@
+---
+title: Overview
+nav_title: Overview
+nav_order: 0
+nav_icon: "🏠"
+---
+
 # Ninjadini Debug Console [NjConsole] for Unity
 
 NjConsole is the ultimate debug console you never knew you needed — until now.
@@ -13,7 +20,7 @@ NjConsole is the ultimate debug console you never knew you needed — until now.
 - 🖥️ Cross-platform support — works in Unity Editor, standalone, WebGL, and mobile (supports safe areas, touch input, keyboard, and all orientations)
 - 🖼️ Dockable editor window and in-game floating overlay for large screens
 - 🚀 Plug-and-play setup — NjConsole starts automatically. No configuration required.
-- 🧰 Built-in utilities — FPS/memory monitors, PlayerPrefs viewer, runtime visual tuning, and device info.
+- 🧰 Built-in utilities — FPS/memory monitors, PlayerPrefs editor, live screen & quality settings, and device info.
 - 🧱 Modular design — plug in your own modules and panels
 - ✂️ Removable — Easily disable NjConsole at compile-time (saves memory, build size, and prevents unintended access)
 - 🧾 Full C# source with XML-documented public APIs.
@@ -27,19 +34,27 @@ NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in
 
 ## 📚 Documentation Topics
 
-- [Console Window](consolewindow.md)  
+**Core**
 
-- [Logging & Logs panel](logging.md)  
+- [Console Window](consolewindow.md) — opening it, activation triggers, access challenges
 
-- [Options Menu / Cheats](optionsmenu.md)
+- [Logging & Logs panel](logging.md) — NjLogger, filtering, log routing, custom handlers
 
-- [Command Line](commandline.md)
+- [Options Menu / Cheats](optionsmenu.md) — building your debug menu, keybindings, shortcuts
 
-- [Custom Panels](custompanels.md)  
+- [Command Line](commandline.md) — running options as commands, variables, scopes
 
-- [Build customization](buildcustomization.md)  
+- [Inspector, Hierarchy & Utilities](inspector.md) — the object inspector, scene tree, monitors and tools
 
-- [Extension Modules](extensionmodules.md)
+**Advanced**
+
+- [Custom Panels](custompanels.md) — add your own panel, in play mode or the editor
+
+- [Build customization](buildcustomization.md) — trimming features per platform, stripping with `NJCONSOLE_DISABLE`
+
+- [Extension Modules](extensionmodules.md) — packaging features as plug-and-play modules
+
+- [Hidden Gems](hiddengems.md) — toasts, text prompts, custom graphs and other public API without its own page
 
 Please also try the provided Demo scene inside Demo folder.
 
@@ -60,5 +75,9 @@ Please also try the provided Demo scene inside Demo folder.
 ---
 
 ### 🔒 License
-Licensed under [Unity Asset Store EULA](https://unity.com/legal/as-terms) as an Extension Asset.    
-Per the Extension Asset license, this asset is sold on a per-seat basis — one license is required for each individual user.     
+Licensed under the [Unity Asset Store EULA](https://unity.com/legal/as-terms) as an **Extension Asset**.
+
+Extension Assets are licensed **per seat** — a seat being one person, rather than one project, studio or
+machine. So a team of ten people working in a Unity project that includes NjConsole needs ten seats.
+
+Seat sales are what fund NjConsole's ongoing development, so thank you for sizing your license to your team.

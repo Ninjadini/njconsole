@@ -1,14 +1,14 @@
 ---
 title: Custom Panels
 nav_section: "Advanced"
-nav_order: 5
+nav_order: 6
 nav_icon: "🧩"
 ---
 
 # Add custom panel (UIToolkit format)
 
 A demo panel code:
-```
+```csharp
 public class DemoPanelModule : IConsolePanelModule
 {
  public string Name => "DemoPanel"; // Name to display on the side panel
@@ -34,10 +34,40 @@ class BasicDemoPanel : VisualElement
 }
 ```
 
+`SideBarOrder` is a plain sort order — a `float`, so you can slot in between the built-in panels:
+
+| Panel | Order |
+|---|---|
+| Logs | 1 |
+| Options | 2 |
+| Hierarchy | 3 |
+| Utilities | 4 |
+| Editor Options | 5 |
+
+So `2.5` puts your panel between Options and Hierarchy.
+
+### Optional members
+
+```csharp
+// Hide the panel without removing the module (e.g. gated on a build flag or a server switch)
+public bool PanelFeatureEnabled => MyGame.IsInternalBuild;
+
+// Replace the sidebar button entirely
+public VisualElement CreateSideButton(ConsoleContext context, Action clickedCallback) { ... }
+```
+Your panel **element** can implement `IConsolePanelModule.IElement` to hear the sidebar button being clicked
+while your panel is already open — usually a cue to reset:
+```csharp
+class BasicDemoPanel : VisualElement, IConsolePanelModule.IElement
+{
+    public void OnReselected() => ResetToTop();
+}
+```
+
 2 ways to register to console.
 
 a. Manually add the panel at runtime by code:  
-```
+```csharp
 if(NjConsole.Modules.GetModule(typeof(DemoPanelModule)) == null){
     NjConsole.Modules.AddModule(new DemoPanelModule()); 
 }
@@ -46,13 +76,13 @@ if(NjConsole.Modules.GetModule(typeof(DemoPanelModule)) == null){
 b. Add via IConsoleExtension:
  1. Add IConsoleExtension interface to your panel module class.
  2. Add [Serializable] attribute to the class.  
- 3. Go to `Project Settings > NjConsole > Extension Modules > Add Extension Module` > add your new class 
+ 3. Go to `Project Settings > Ninjadini ⌨ Console > Extension Modules > Add Extension Module` > add your new class 
  4. Press `Apply changes`
 
 # Add custom panel (OnGUI / IMGUI format)
 
 Alternatively, you can also add your panel using OnGUI rendering.  
-```
+```csharp
 public class DemoOnGUIPanelModule : IConsoleIMGUIPanelModule
 {
    public string Name => "OnGUI";
@@ -77,15 +107,12 @@ class BasicOnGUIDemoPanel : IConsoleIMGUI
 
 # Panels for Edit mode (both in and out of play mode)
 
-You can easly make panels that can show outside the play mode.  
-Perhaps you are looking into migrating your existing tools into NjConsole panels so that it is easier to find.  
-Alternatively, consider migrating some of your editor tools to work in play mode panels too.
+Panels can show outside play mode too — handy for pulling your existing editor tools somewhere easier to find,
+or for making them work in play mode as well.
 
-In short, `IConsoleModule > PersistInEditMode` determines if the module is cleaned up after play mode.  
-
-All you need to do is add the module when you want it in editor.  
-Here is an example to add your `Uber` editor panel at editor start up:
-```
+`IConsoleModule > PersistInEditMode` decides whether the module is cleaned up after play mode. Beyond that you
+just add the module when you want it. Registering an `Uber` editor panel at editor start up:
+```csharp
 [InitializeOnLoad]
 public class MyUberEditorPanel : IConsolePanelModule
 {
@@ -122,14 +149,14 @@ class MyUberEditorPanelElement : VisualElement
 
 # Lock editor console window to a single panel
 
-You may want to have multiple console windows open with each set to a specific panel for easy access.  
-This should allow you to migrate your existing editor tools to NjConsole panel while keeping the old way to access it.
+Open several console windows, each locked to one panel — so your migrated editor tools keep a direct entry
+point of their own.
 
-Here is how it looks:  
+
 <img src="images/lock-panel.png" alt="Screenshot of locking a panel to window">
 
 Using the previous UberPanel example, you can make a menu item to open your panel directly and lock it:
-```
+```csharp
 [MenuItem("Tools/Create Uber Panel")]
 public static void CreateUberPanel()
 {
@@ -139,13 +166,13 @@ public static void CreateUberPanel()
         NjConsole.Modules.AddModule(new MyUberEditorPanel());
     }
 
-    // Create and show the console editor window.
+    // Open a new console editor window (use GetOrCreateWindow() to reuse an existing one instead).
     var window = NjConsoleEditorWindow.CreateWindow();
     
     // Set console panel to show MyUberEditorPanel
     window.Window.SetActivePanel<MyUberEditorPanel>();
     
-    // lock to single panel (you can always unlock it from the window context menu - top right tripple dot)
+    // lock to single panel (unlock it any time from the window context menu - top right triple dot)
     window.SetLockedToSinglePanel(true);
 }
 ```

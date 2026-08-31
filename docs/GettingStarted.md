@@ -3,26 +3,45 @@
 ### ⚠️ Unity 2022.3 or newer is required   
 NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in 2022.3 LTS.
 
+### ✅ Nothing to set up
+NjConsole starts itself — no prefab, no GameObject, no init call. Import it and it's running.
+
+- 🎬 **Try the demo:** open `Demo/Demo.unity`. Delete the `Demo` folder once you're done with it.
+  > Using the new Input System? Select the scene's **EventSystem** and click
+  > **Replace with InputSystemUIInputModule** in the Inspector.
+- ⚙️ **Settings:** `Project Settings > Ninjadini ⌨ Console`
+- 🌐 **Full docs:** [ninjadini.github.io/njconsole](https://ninjadini.github.io/njconsole/)
 
 ### 🧩 Open console window in editor
-- Navigate to: `Windows > ⌨ Ninjadini Console`
-- You can open multiple console windows by selecting the menu again.
+- Navigate to: `Window > ⌨ Ninjadini Console (new window)`
+- Select it again to open another window — you can have several open at once.
 
 <img src="images/open-editor-window.png" alt="Screenshot of editor windows">
 
 ### 🕹️ Open console in game view
 - **Keyboard:** Press the <code>`</code> key (top-left on US keyboard). Press again to close.
+- **Keyboard:** `Shift` + <code>`</code> opens straight into the Command Line.
 - **Mouse:** Hold at the top-left corner of the game screen for 1 second.
 - **Mouse (alternative):** Double-tap the top-left corner of the screen.
 
-You can customize these triggers in `Project Settings > Ninjadini ⌨ Console`.  
-This is also where you can set a **passphrase challenge** to prevent unintended access.
+Customize these triggers in `Project Settings > Ninjadini ⌨ Console` — also where you set a **passphrase challenge** to prevent unintended access.
 
 #### 👀 Sidebar Tips (During Play Mode)
 - Press and hold any empty area of the sidebar to temporarily peek behind the console.
-- On screens with at least 650px width or height, a window mode button appears at the end of the sidebar — allowing you to undock and resize the console overlay.
+- On screens 650px or wider (or taller), a window mode button at the end of the sidebar lets you undock and resize the overlay.
 
-<div class="page" />
+### 🧭 The panels
+
+| Panel | What's in it |
+|---|---|
+| **Logs** | Log viewer, filtering, search, and the Command Line |
+| **Options** | Your cheats / debug menu |
+| **Hierarchy** | Live scene tree — drill into GameObjects and their components |
+| **Utilities** | FPS & memory monitors, PlayerPrefs editor, editable screen & quality settings, device info, log export, UI scale |
+
+Clicking an object anywhere — a log link, a hierarchy entry — opens the **Object Inspector**: read and edit fields and properties, follow references, call methods, all while the game runs.
+
+<div class="page"></div>
 
 
 
@@ -34,10 +53,13 @@ This is also where you can set a **passphrase challenge** to prevent unintended 
 
 # 📝 NjLogger
 
-Unlike Debug.Log, which allocates memory and produces expensive stack traces, NjLogger:
-- Avoids GC pressure with zero-allocation argument formatting
-- Integrates seamlessly with NjConsole (filtering, channels, object inspection)
-- Still captures logs from Debug.Log() to appear in NjConsole automatically
+`Debug.Log` allocates and captures an expensive stack trace on every call. NjLogger:
+- Formats arguments with zero allocations
+- Integrates with NjConsole's filtering, channels and object inspection
+- Still captures `Debug.Log()` automatically
+
+> **Do I have to replace my `Debug.Log()` calls?** No — they show up in NjConsole either way.
+> Reach for NjLogger where the allocations matter. The two mix freely.
 
 ```
 // These logs will appear in NjConsole with appropriate severity styling
@@ -74,43 +96,33 @@ Debug.Log("Logs from Unity’s Debug.Log() automatically appear in NjConsole");
 
 <img src="images/log-filters.png" alt="Screenshot of log filtering" width="450" >
 
-NjConsole provides powerful filtering options to help you focus on the logs that matter:
-
-- 🔤 **Text Search** Use multiple conditions to refine results.
-  - `And` All conditions must match
-  - `Or` At least one Or condition must match
-  - `Not` Must not match to pass the filter
-- 🧵 **Channels**
-  - [ * ] Show all logs (no channel filtering)
-  - [ - ] Show logs that have no channel assigned
-- 🚦 **Log Levels**
-  - Filter logs by severity: Info, Warn, Error
+- 🔤 **Search** — stack multiple conditions.
+  - `And` all must match · `Or` at least one must match · `Not` must not match
+  - Match types: `IgnoreCase`, `CaseSensitive`, `Loose` (fuzzy), `RegExp`. Term sets can be saved by name.
+- 🧵 **Channels** — [ * ] all logs · [ - ] only logs with no channel
+- 🚦 **Levels** — Debug, Info, Warn, Error, with warning / error counts on the button
 
 📍 Right-click any log to pin it. Pinned logs remain visible regardless of filters.
 
 ## 🔗 Logs object linking
-You can include object references directly in your logs.  
-When clicked, they open in the Object Inspector for quick inspection and editing.
+Log object references directly — click one to open it in the Object Inspector and edit it live.
 ```
 var playerObj = GetTestPlayerObj();
 NjLogger.Info("Here is a log with a link to ", playerObj);
 NjLogger.Info("Here is a link to ", playerObj.AsLogRef(), " - mixed in multiple arguments");
 ```
 
-When you click the log entry in the console, a button will appear for any linked object:  
+Clicking the log row shows a button for each linked object:  
 <img src="images/logs-object-link.png" alt="Screenshot of object link" width="450" >   
 Clicking the button opens the object in the inspector:  
 <img src="images/logs-inspector.png" alt="Screenshot of object link" width="450" >  
 
-> **♻️ Memory-Safe by Design**  
-> Object links are held via weak references, so they won't cause memory leaks. However, if the object is garbage collected, the link may expire.  
-> To retain the object for the log's lifetime (as long as it stays in the ring buffer), use a strong reference:  
-> `NjLogger.Info("A strong object link:", aTestObj.AsStrongLogRef());`
-  
-> **⚠️ Limitations**  
-> While you can view and modify many fields and properties, not all data types are fully editable (yet).
+> **♻️ Memory-safe** — links are weak references, so they never leak. The trade-off: a collected object's link expires.
+> To hold it for as long as the log stays in the ring buffer, use `aTestObj.AsStrongLogRef()`.
 
-<div class="page" />
+> **⚠️** Many fields and properties are editable, but not all types are supported yet.
+
+<div class="page"></div>
 
 
 
@@ -123,17 +135,15 @@ Clicking the button opens the object in the inspector:
 
 # 🛠️ Options Menu / Cheats
 
-You can build interactive menus for in-game tools, debug settings, or cheat features — great for prototyping or QA workflows.
+Build interactive menus for in-game tools, debug settings and cheats — great for prototyping and QA.
 
 <img src="images/options-window.png" alt="Screenshot of log filtering" width="450" >
 
 🧭 Two Ways to Add Options
 
-## 🏷️ Add Option Items with \[ConsoleOption\] Attribute
+## 🏷️ Add Option Items with `[ConsoleOption]` Attribute
 
-You can easily register fields, properties or methods as menu items using the attribute.
-
-Call this during setup to register all `[ConsoleOption]` entries on a class:
+Register fields, properties or methods as menu items. Call this once during setup:
 ```
 void Start()
 {
@@ -142,9 +152,8 @@ void Start()
         // If 'this' is a MonoBehaviour, options will auto-remove when `OnDestroy()`
 }
 ```
-> ⚠️ To add static members, you need to pass the type instead.   
-> `NjConsole.Options.CreateCatalogFrom(typeof(DemoNjConsole));`   
-> The separation exists because the static nature means it can persist without having an instance alive.
+> ⚠️ For static members pass the type instead: `NjConsole.Options.CreateCatalogFrom(typeof(DemoNjConsole));`
+> They're separate because statics persist without a live instance.
 
 
 ### 🔘 Buttons
@@ -180,6 +189,9 @@ void AutoCloseConsole() {
         Debug.Log("Console overlay should be closed now that you clicked a button with auto close flag");
 }
 ```
+
+> ⌨️ `key:` takes `UnityEngine.InputSystem.Key` on the new **Input System**, `UnityEngine.KeyCode` on the legacy
+> **Input Manager**. Key bindings are Editor-only until you enable `Features > In Player Key Bindings`.
 
 ### ✅ Toggles
 ```
@@ -229,20 +241,18 @@ DeviceOrientation preferredOrientation;
 ```
 
 ### ⚠️ Command Line fallback for unsupported options
-Members marked with `[ConsoleOption]` that the Options Menu can’t render are hidden (e.g. requiring multiple parameters or use unsupported types).   
-Hidden options are still callable via the Command Line.   
-A notice like “3 hidden item(s)” and a button to open Command Line will display.   
-See [online documentation](https://ninjadini.github.io/njconsole/) more details about Command Line.
+Members the Options Menu can't render — multiple parameters, unsupported types — are hidden, but still callable
+from the Command Line. You'll see a “3 hidden item(s)” notice with a button to open it.
 
 
 ---
 
 ## 🧩 Add Option Items Programmatically
 
-Use this method for full control and dynamic setup.
+For full control and dynamic setup.
 
 ```var catalog = NjConsole.Options.CreateCatalog();```
-> Catalogs are useful because when you no longer need a set of option menus, you can just call `catalog.RemoveAll()`.  
+> A catalog is the unit of cleanup — `catalog.RemoveAll()` when you're done with the set.
 
 ### 🔘 Buttons
 ```
@@ -273,80 +283,47 @@ var toggle2 = false;
 catalog.AddToggle("My First Toggle", (v) => toggle1 = v, () => toggle1);
 
 // folder + key binding + auto close
-catalog.AddToggle("A Folder / My T key Bound Toggle", (v) => toggle2 = v, () => toggle2);
+catalog.AddToggle("A Folder / My T key Bound Toggle", (v) => toggle2 = v, () => toggle2)
         .BindToKeyboard(KeyCode.T)
         .AutoCloseOverlay();
 ```
 
-> Both buttons and toggles can be bound to a keyboard key via `...BindToKeyboard(KeyCode.Space)`.  
-> Shift + Ctrl + E style combo can be done via `...BindToKeyboard(KeyCode.E, ConsoleKeyBindings.Modifier.Shift | ConsoleKeyBindings.Modifier.Ctrl)`.  
-> ⚠️ Only one keybinding per item.  
->    
-> Set console overlay to auto close after you press the button via `...AutoCloseOverlay()`.  
+> Buttons and toggles take `.BindToKeyboard(KeyCode.Space)`, or a combo via
+> `.BindToKeyboard(KeyCode.E, ConsoleKeyBindings.Modifier.Shift | ConsoleKeyBindings.Modifier.Ctrl)`.
+> One keybinding per item. `.AutoCloseOverlay()` closes the overlay after a press.
 
 
-### 🔢 Numbers
-```
+### 🔢 Numbers, text & dropdowns
+```csharp
 var aFloat = 12.34f;
-catalog.AddNumberPrompt("A Number", (v) => aFloat= v, () => aFloat);
+catalog.AddNumberPrompt("A Number", (v) => aFloat = v, () => aFloat);
 
-// clamped int number
-var int0To100 = 50;
-catalog.AddNumberPrompt("0 to 100", (v) => int0To100 = Mathf.Clamp(v, 0, 100), () => int0To100);
+// clamped, plus left/right step buttons via the last arg
+var stepped = 50;
+catalog.AddNumberPrompt("0 to 100", (v) => stepped = Mathf.Clamp(v, 0, 100), () => stepped, 2);
 
-// Number prompt with left and right step buttons
-var steppedNumber = 10;
-catalog.AddNumberPrompt("Stepped number", (v) => steppedNumber = v, () => steppedNumber, 2);
-```
-
-### 🔢 Text fields
-```
 var text = "Initial text";
 catalog.AddTextPrompt("My Text Prompt", (v) => text = v, () => text);
 
-// Text prompt with submission validation and input restriction
-var text2 = "Initial text";
-catalog.AddTextPromptWithValidation("My validated text", 
-  getter: () => text2, 
-  setter: v => {
-        if(v.All(char.IsUpper)) // in this example we only accept capital letters
-        {
-                text2 = v;
-                return true; // return true to accept the input and close the prompt.
-        }
-        return false; // Return false to block user from closing the dialog due to invalid value.
-  },
-  validator: (v) => {
-        if (v.Length > 5) v = v.Substring(0, 5); // Trim out invalid characters (or length) and return the valid version (optional)
-        return v;
-  } );
-```
-
-### 🔽 Dropdown choices
-```
+// Setter before getter here too.
 var choices = new List<string>() { "A", "B", "C", "D" };
 var index = 0;
-catalog.AddChoice("A Choice List", choices, () => index, (v) => index = v);
+catalog.AddChoice("A Choice List", choices, (v) => index = v, () => index);
 
-// An enum choice:
 var platform = RuntimePlatform.OSXEditor;
-options.AddEnumChoice("A Choice Enum", () => platform, (v) => platform = v);
-
+catalog.AddEnumChoice("A Choice Enum", (v) => platform = v, () => platform);
 ```
-> 💡 Use grouped paths (like "Category / Subgroup / Option") to keep menus organized and easier to navigate:  
-> `catalog.AddButton("App / Utilities / Reload Scene", () => ReloadScene());`
+> `AddTextPromptWithValidation()` lets you reject or rewrite input before it's accepted — see the online docs.
+
+> 💡 Grouped paths keep menus navigable: `catalog.AddButton("App / Utilities / Reload Scene", () => ReloadScene());`
 
 
-## 🤔 Should You Use \[ConsoleOption\] or Add Programmatically?
+## 🤔 Should You Use `[ConsoleOption]` or Add Programmatically?
 
-**Use \[ConsoleOption\] when:**  
-- You want a quick and declarative way to expose instance values and methods
-- You want automatic cleanup when the object is destroyed (MonoBehaviour only)
+**`[ConsoleOption]`** — quick and declarative, and cleans up automatically when the MonoBehaviour is destroyed.
 
-**Use programmatic registration when:**  
-- You want fine-grained control over when and how options appear
-- You want slightly faster setup (bypassing reflection)
-- You need dynamic options (e.g. buttons generated per inventory item):  
+**Programmatic** — control over when and how options appear, slightly faster (no reflection), and the only way
+to build options dynamically:
 ```
 foreach (var itemType in inventoryItemTypes)
 {
@@ -355,76 +332,68 @@ foreach (var itemType in inventoryItemTypes)
 }
 ```
 
-<div class="page" />
+<div class="page"></div>
 
 
 
 ## 🎯 Shortcuts
 
-You can create runtime shortcut buttons for quick access to options.
-> **Note:** Shortcuts are available only in runtime overlay mode, not in the editor window.
+Pin any option item or folder for quick access. Two kinds: **menu shortcuts** (a pinned list at the top of the
+Options panel, editor window and runtime overlay) and **overlay shortcuts** (buttons snapped to a screen corner,
+runtime overlay only). Below covers overlay shortcuts.
 
 <img src="images/options-shortcuts.png" alt="Screenshot of options shortcut" width="450" >
 
 ### 📌 How to Create a Shortcut
-- Press and hold on any option item or folder in the options menu.
-- Drag it to a screen corner to create a shortcut.
+Press and hold any option item or folder, then drag it to a screen corner.
 
-Shortcuts will align to one of four corners:
-- Items fill horizontally or vertically based on your drag position.
-- For example: top-left corner can fill right or down depending on where you drop.
+Shortcuts snap to one of four corners and fill horizontally or vertically depending on where you drop —
+top-left can fill right or down.
 
 ### ✏️ Shortcut Edit Mode
-Once you drop your first shortcut, you’ll enter shortcut edit mode:
-- 🟦 Drag & drop existing items to reposition them.
-- 🔁 Switch between 3 different shortcut layouts (slots 1–3).
-- ⚙️ Toggle Auto Show at Start to display shortcuts on game launch.
-- 🧠 Shortcuts sync with menu visibility — they appear/disappear as the linked options do.
-- 🫥 If you pressed `hide shortcuts`, use: Console > Options > Show Shortcuts to reopen edit mode.
+Dropping your first shortcut enters edit mode:
+- 🟦 Drag existing items to reposition them.
+- 🔁 Switch between 4 layouts (`Set 1`–`Set 4`).
+- ⚙️ `Auto Show at start` displays them on game launch.
+- 🧠 Shortcuts follow their linked options — they appear and disappear together.
+- 🫥 After `Hide shortcuts`, reopen edit mode with the `□ Shortcuts` button in the Options panel.
 
-<div class="page" />
+<div class="page"></div>
 
-## 🎯 Command Line
+# 💻 Command Line
 
-NjConsole’s Command Line lets you run user-defined and built-in commands through text input.
-
-Commands are registered the same way as the **Options Menu** (via `[ConsoleOption]` or programmatically).  
+Run your own and built-in commands as text. Commands register exactly like the **Options Menu** —
+via `[ConsoleOption]` or programmatically.
 
 ## ▶️ Basic Usage
 
-- **Show Command Line**: Press any key while focused on the Logs panel.
-- **Autocomplete**: Suggestions appear as you type.
-    - `Tab` accepts the first suggestion.
-    - `Shift+↑` / `Shift+↓` to navigate suggestions, `Tab` or `Enter` to accept.
-- **History**: `↑` / `↓` cycles through previous commands.
-- **Hide**: `Esc` closes the Command Line.
+- **Show**: press any key while focused on the Logs panel, or `Shift` + <code>`</code> in the runtime overlay.
+- **Autocomplete**: `Tab` accepts the first suggestion; `Shift+↑` / `Shift+↓` navigates, `Tab` or `Enter` accepts.
+- **History**: `↑` / `↓`.
+- **Hide**: `Esc`.
 
 ### 📱 On Mobile (no physical keyboard)
-
-- Tap the **Logs** button again to show the Command Line.
-- The input field uses a text-prompt style with autocomplete.
-- Tap the `⌨` button to toggle between prompt and normal input.
+Tap the **Logs** button again to show it. The field uses a text-prompt style with autocomplete — tap `⌨` to
+switch between prompt and normal input.
 
 ---
 
 ## 🔤 Command Structure & Syntax
 
 ```
-<command> <parameters seperated by space ` ` or comma `,`>
+<command> <parameters separated by space ` ` or comma `,`>
 ```
 
-**Built-in commands** appear under `/`.   
-Example: `/help` lists all commands.   
-**String** params can be wrapped in quotes (`"`) to include spaces or commas. Escape `"` with `\"`. 
+**Built-in commands** live under `/` — `/help` lists everything.
+**String** params take quotes (`"`) for spaces or commas; escape with `\"`.
 
-**Notes:**
-- Command names are case-insensitive. Conflicts in casing will show in autocomplete suggestions but may not execute correctly.
-- Names can contain spaces; `/` creates grouped folders, like in the Options Menu.
-- Method overloads are **not** supported. Each command must be unique — add a suffix to avoid collisions.
+- Names are case-insensitive. Casing conflicts show in autocomplete but may not execute correctly.
+- Names can contain spaces; `/` creates folders, as in the Options Menu.
+- Overloads are **not** supported — each command must be unique.
 
-<div class="page" />
+<div class="page"></div>
 
-## 💡 Command Line Examples
+## 💡 Examples
 
 ```csharp
 [ConsoleOption]
@@ -452,7 +421,7 @@ or `demo/introduce "Ninjadini", 30`
 
 ## 🏗️ Advanced Parameters - Constructor Arguments
 
-If a parameter is an object that requires constructor arguments, group them in parentheses:  
+Group constructor arguments in parentheses:  
 ```csharp
 [ConsoleOption("math / vector multiply")]
 static Vector3 MultiplyV(Vector3 a, float b) => a * b;
@@ -460,19 +429,11 @@ static Vector3 MultiplyV(Vector3 a, float b) => a * b;
 Command: `math/vector multiply (1 2 3) 1`   
 or `math/vector multiply (1,2,3),1`   
 
-**For other topics about Command Line such as:**
-- Nested constructors
-- Return Values
-- Storage commands / $ variables
-- Scopes
-- Accessing Logged & Hierarchy Objects
-- Separating Command Catalogs
-- Input Prompt Takeover
-- Adding a Custom Executor
+**More in the [online documentation](https://ninjadini.github.io/njconsole/):** nested constructors, return
+values, storage commands and `$` variables, scopes, accessing logged and hierarchy objects, separating command
+catalogs, input prompt takeover, and custom executors.
 
-Please see [online documentation](https://ninjadini.github.io/njconsole/).
-
-<div class="page" />
+<div class="page"></div>
 
 
 
@@ -480,6 +441,51 @@ Please see [online documentation](https://ninjadini.github.io/njconsole/).
 
 
 
+
+# 🚢 Before you ship
+
+### 🔐 Keep players out
+Add an access challenge so the console can't be opened by accident:
+`Project Settings > Ninjadini ⌨ Console > Playmode Overlay > Add Access Challenge > Secret Pass`.
+Individual panels can also be switched off for player builds under `... > Features`.
+
+### ✂️ Or strip it out entirely
+`Project Settings > Ninjadini ⌨ Console > Disable NjConsole` adds the `NJCONSOLE_DISABLE` define and
+compiles NjConsole away — smaller build, no memory cost, nothing to reverse engineer. Key classes stay
+stubbed so your project still compiles. Recommended for production releases.
+> Wrap your own cheat code in `#if !NJCONSOLE_DISABLE` so it's stripped too.
+
+<div class="page"></div>
+
+# ⌨️ Cheat sheet
+
+| Key | Where | Action |
+|---|---|---|
+| <code>`</code> | Game view | Show / hide the console overlay |
+| `Shift` + <code>`</code> | Game view | Open straight into the Command Line |
+| any key | Logs panel | Open the Command Line |
+| `Tab` | Command Line | Accept the first suggestion |
+| `Shift`+`↑` / `↓` | Command Line | Move through suggestions |
+| `↑` / `↓` | Command Line | Previous commands |
+| `Esc` | Command Line | Close it |
+| `Ctrl`/`Cmd`+`C` | Logs panel | Copy selected rows |
+| `Ctrl`/`Cmd`+`Shift`+`C` | Logs panel | Copy rows *with* stack traces |
+| Right-click | A log row | Pin it — stays visible through filters |
+
+# 🧯 If something looks off
+
+**Overlay is the wrong size** (on device, or in Game view on a high-DPI screen) — `Utilities > Tools > UI Scale + / -`.
+
+**Errors after importing** — on the new Input System? Install the Input System package, or set
+`Project Settings > Player > Active Input Handling` to `Input Manager (old)`.
+
+**Key bindings don't work in a build** — they're Editor-only until you enable
+`... > Ninjadini ⌨ Console > Features > In Player Key Bindings`.
+
+**Logs appear twice** — your own logger is likely feeding both `Debug.Log()` and NjLogger. Turn off
+`... > Ninjadini ⌨ Console > Logging > Debug.Log() to NjLogger`.
+
+<div class="page"></div>
 
 # 🚀 Ready for More?
 
@@ -489,9 +495,7 @@ Please see [online documentation](https://ninjadini.github.io/njconsole/).
 - Building editor-bound options menus
 - Accessing log history and writing custom log handlers
 - Customizing log timestamp formats
-- Creating shortcut-style overlays (e.g. FPS monitor)
-- Setting up access challenges
-- Tailoring player builds by enabling/disabling features  
+- Creating your own access challenge or console activation trigger
 
 ...and more!
 

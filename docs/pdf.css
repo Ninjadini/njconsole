@@ -1,0 +1,41 @@
+/* ============================================================
+   PDF overrides — yzane.markdown-pdf
+   The PDF deliberately does NOT load export.css (that's the dark
+   theme for the website). This sits on top of the extension's own
+   light defaults: markdown.css + github.css + markdown-pdf.css.
+   ============================================================ */
+
+/* A bit more gutter than the extension's default `0 12px`. */
+body {
+  padding: 0px 0px;
+  background: #ffffff;
+}
+
+/* markdown-pdf.css tints inline code #C9AE75 for dark backgrounds,
+   which is washed out on white. GitHub-style chip instead. */
+:not(pre):not(.hljs) > code {
+  color: #24292f;
+  background: #eff1f3;
+  border-radius: 4px;
+  padding: 0.12em 0.35em;
+}
+
+/* No scrollbars on paper — wrap long code lines instead of clipping them. */
+pre {
+  overflow-x: visible;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Don't strand a heading at the bottom of a page. */
+h1, h2, h3, h4 {
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+/* Don't split these across a page boundary. Costs about one extra page. */
+pre, table, blockquote, li {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}

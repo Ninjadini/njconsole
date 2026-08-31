@@ -1,7 +1,7 @@
 ---
 title: Build Customization
 nav_section: "Advanced"
-nav_order: 6
+nav_order: 7
 nav_icon: "🔧"
 ---
 
@@ -9,8 +9,24 @@ nav_icon: "🔧"
 
 ## 🔧 Dynamically Configure Console Features During Build
 
+Same switches as `Project Settings > Ninjadini ⌨ Console > Features` — you only need a build processor if
+they differ per platform or build flavour.
+
+| Field on `ConsoleSettings` | Turns off in player builds |
+|---|---|
+| `inPlayerLogsPanel` | Logs panel |
+| `inPlayerOptionsPanel` | Options panel |
+| `inPlayerHierarchyPanel` | Hierarchy panel |
+| `inPlayerUtilitiesPanel` | Utilities panel |
+| `inPlayerObjectInspector` | Object Inspector — including log object links, hierarchy component detail and type search |
+| `inPlayerCommandLine` | Command Line |
+| `inPlayerKeyBindings` | Key bindings (off by default) |
+| `autoStartOverlay` | Auto-starting the runtime overlay |
+
+All of them are always on in the Editor.
+
 The example below disables the Hierarchy and Object Inspector panels for WebGL builds.
-```
+```csharp
 public class NjConsoleSettingsBuildProcessor : IPreprocessBuildWithReport
 {
     public int callbackOrder => 0;
@@ -21,9 +37,15 @@ public class NjConsoleSettingsBuildProcessor : IPreprocessBuildWithReport
 
         settings.inPlayerObjectInspector = platform != BuildTarget.WebGL;
         settings.inPlayerHierarchyPanel = platform != BuildTarget.WebGL;
+
+        EditorUtility.SetDirty(settings);
+        AssetDatabase.SaveAssets();
     }
 }
 ```
+> The settings live in a `Resources` asset, so mark it dirty and save before the build reads it. Revert it
+> afterwards (or in `OnPostprocessBuild`) so the change doesn't leak into the next build.
+
 > ⚠️ Note: In production builds, a determined attacker could still enable console features via memory hacking.   
 > For best security, use compile define `NJCONSOLE_DISABLE` to strip out the console completely. See next section for more info.
 
@@ -31,24 +53,25 @@ public class NjConsoleSettingsBuildProcessor : IPreprocessBuildWithReport
 # ✂️ Disable / Strip NjConsole for Production
 
 ### ✅ Benefits of Stripping
-- 🧠 Reduces memory usage and final build size.
-- 🔐 Prevents malicious users from reverse engineering to access NjConsole UI, cheat options, etc.
-- ✅ Highly recommended for production releases.
+- 🧠 Smaller build, less memory.
+- 🔐 Nothing to reverse engineer — no console UI, no cheat options.
+- ✅ Recommended for production releases.
 
 ### 🧩 How It Works
-- ✂️ NjConsole scripts are conditionally stripped using `#if !NJCONSOLE_DISABLE`.
-- 🧱 Most interfaces and key classes are safely **stubbed**, so your project continues to **compile without errors**.
-- ❗ Certain advanced APIs are completely stripped and must be wrapped manually using `#if !NJCONSOLE_DISABLE`.
-- 🔒 You should also wrap your own cheat/debug logic with `#if !NJCONSOLE_DISABLE` to ensure it’s fully stripped from production builds.
-- 📋 **Log history is still collected** in the background — useful for crash reports or customer service diagnostics.
+- ✂️ NjConsole scripts are stripped behind `#if !NJCONSOLE_DISABLE`.
+- 🧱 Most interfaces and key classes are **stubbed**, so your project still **compiles**.
+- ❗ Some advanced APIs are stripped entirely and must be wrapped yourself.
+  See [Hidden Gems](hiddengems.md#-what-survives-stripping) for what is stubbed and what isn't.
+- 🔒 Wrap your own cheat/debug logic in `#if !NJCONSOLE_DISABLE` too, so it's stripped as well.
+- 📋 **Log history is still collected** in the background — useful for crash reports and support diagnostics.
 
 ### ✂️ How to Disable NjConsole
-- 🎛️️ **UI Method:** Go to Project Settings > NjConsole > Disable NjConsole
+- 🎛️️ **UI Method:** Go to `Project Settings > Ninjadini ⌨ Console > Disable NjConsole`
 - ✍️ **Manual Define:** Add `NJCONSOLE_DISABLE` in _Player Settings > Scripting Define Symbols_.
 - 🧑‍💻 **Code/API Method:** Call `ConsoleEditorSettings.AddDefineSymbolToDisableConsole()`
 
-Example below disables NjConsole in release builds, and attempts to reenable it after the build.
-```
+This disables NjConsole for release builds and re-enables it afterwards:
+```csharp
 using Ninjadini.Console.Editor;
 using UnityEditor;
 using UnityEditor.Build;
@@ -70,7 +93,7 @@ public class NjConsoleBuildDisableProcessor : IPreprocessBuildWithReport, IPostp
     public void OnPostprocessBuild(BuildReport report)
     {
         // Reenable NjConsole.
-        // Unfortunately, if the build failed, this code will not execute and you'll need to manually turn it on from Project Settings > NjConsole > Disable.
+        // Unfortunately, if the build failed, this code will not execute and you'll need to manually turn it on from Project Settings > Ninjadini ⌨ Console > Disable NjConsole.
         // This code is not needed if you are using a build box where you revert the changes after build.
         ConsoleEditorSettings.RemoveDefineSymbolAndEnableConsole();
     }

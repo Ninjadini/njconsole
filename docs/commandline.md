@@ -7,45 +7,59 @@ nav_icon: "⌨️"
 
 # 💻️ Command Line
 
-NjConsole’s Command Line lets you run user-defined and built-in commands through text input.
-
-Commands are registered the same way as the **Options Menu** (via `[ConsoleOption]` or programmatically).  
-See [Options Menu](optionsmenu.md) for full details.  
-By default, all Options Menu entries also appear as commands. To separate the two, see **Managing Command Catalogs**.
+Run your own and built-in commands as text. Commands register exactly like the **Options Menu** —
+via `[ConsoleOption]` or programmatically, see [Options Menu](optionsmenu.md).
+Every Options Menu entry doubles as a command by default; **Separating Command Catalogs** below splits them.
 
 ---
 
 ## ▶️ Basic Usage
 
-- **Show Command Line**: Press any key while focused on the Logs panel.
-- **Autocomplete**: Suggestions appear as you type.
-    - `Tab` accepts the first suggestion.
-    - `Shift+↑` / `Shift+↓` to navigate suggestions, `Tab` or `Enter` to accept.
-- **History**: `↑` / `↓` cycles through previous commands.
-- **Hide**: `Esc` closes the Command Line.
+- **Show**: press any key while focused on the Logs panel, or `Shift` + <code>`</code> in the runtime overlay.
+- **Autocomplete**: `Tab` accepts the first suggestion; `Shift+↑` / `Shift+↓` navigates, `Tab` or `Enter` accepts.
+- **History**: `↑` / `↓`.
+- **Hide**: `Esc`.
 
 ### 📱 On Mobile (no physical keyboard)
-
-- Tap the **Logs** button again to show the Command Line.
-- The input field uses a text-prompt style with autocomplete.
-- Tap the `⌨` button to toggle between prompt and normal input.
+Tap the **Logs** button again to show it. The field uses a text-prompt style with autocomplete — tap `⌨` to
+switch between prompt and normal input.
 
 ---
 
 ## 🔤 Command Structure & Syntax
 
 ```
-<command> <parameters seperated by space ` ` or comma `,`>
+<command> <parameters separated by space ` ` or comma `,`>
 ```
 
-**Built-in commands** appear under `/`.   
-Example: `/help` lists all commands.   
-**String** params can be wrapped in quotes (`"`) to include spaces or commas. Escape `"` with `\"`. 
+**Built-in commands** live under `/` — `/help` lists everything.
+**String** params take quotes (`"`) for spaces or commas; escape with `\"`.
 
-**Notes:**
-- Command names are case-insensitive. Conflicts in casing will show in autocomplete suggestions but may not execute correctly.
-- Names can contain spaces; `/` creates grouped folders, like in the Options Menu.
-- Method overloads are **not** supported. Each command must be unique — add a suffix to avoid collisions.
+### 🧾 Built-in `/` commands
+
+| Command | What it does |
+|---|---|
+| `/help` | List every available command |
+| `/clear logs` | Clear the log history |
+| `/filter cmds` | Filter the Logs panel down to Command Line output only |
+| `/filter reset` | Clear all log filters |
+| `/store <name>` | Store the last result `$_` under a name |
+| `/retrieve <name>` | Retrieve a stored object (becomes the new `$_`) |
+| `/list stored` | List all stored objects |
+| `/clear stored` | Clear all stored objects |
+| `/scope [name]` | Set scope `$@` to `$_`, or to a stored object if you pass a name |
+| `/rescope` | Go back to the previous scope `$@prev` |
+| `/call <member> [args]` | Call a field, property or method on the current scope |
+| `/inspect [name]` | Open `$_` (or a stored object) in the Object Inspector |
+| `/destroy [name]` | Destroy `$_` (or a stored object) |
+| `/find type` | Search loaded assemblies with the type search prompt |
+| `/close` | Close the console overlay (runtime only) |
+
+`/` commands always take priority over your own commands.
+
+- Names are case-insensitive. Casing conflicts show in autocomplete but may not execute correctly.
+- Names can contain spaces; `/` creates folders, as in the Options Menu.
+- Overloads are **not** supported — each command must be unique, so add a suffix to avoid collisions.
 
 ---
 
@@ -78,7 +92,7 @@ or `demo/introduce "Ninjadini", 30`
 
 ## 🏗️ Advanced Parameters - Constructor Arguments
 
-If a parameter is an object that requires constructor arguments, group them in parentheses:  
+Group constructor arguments in parentheses:  
 ```csharp
 [ConsoleOption("math / vector multiply")]
 static Vector3 MultiplyV(Vector3 a, float b) => a * b;
@@ -123,25 +137,25 @@ Output: `> PlayerProfile; Scope $@ set.`
 
 > ℹ️ If a command returns a null object, the returned object variable `$_` will not change.
 
-## 📦 Storage commands
+## 📦 Storing objects for later
 
-`/store <name>`: store the last returned object.   
-`/retrieve <name>`: retrieve a stored object.   
-`/list stored`: list stored variables.   
+Name the last result so you can feed it back into another command later:
+```csharp
+[ConsoleOption("profiles/getprofile")]
+PlayerProfile GetProfile(string id) { ... }
 
-**Example:**
-```
 [ConsoleOption("profiles/loadprofile")]
 void LoadProfile(PlayerProfile value) { ... }
-
-Command: /store profile
-Command: profiles/loadprofile $profile
-Output: `> PlayerProfile; Scope $@ set.`
 ```
+```
+> profiles/getprofile user1234     // returns a PlayerProfile, now in $_
+> /store profile                   // keep it as $profile
+> profiles/loadprofile $profile    // pass it to another command
+```
+`/list stored` shows everything you've named, `/clear stored` empties it.
 
 ## 🔍 Scopes
-When a command returns a **class object**, the Command Line automatically switches scope to that object.
-This is shown in the output as: `Scope $@ set`.
+Returning a **class object** switches scope to it automatically — the output says `Scope $@ set`.
 
 **Scope Variables**   
 - `$@` — current scope object.
@@ -149,7 +163,7 @@ This is shown in the output as: `Scope $@ set`.
 - `$_` — last returned object (not necessarily scoped).
 
 ### /call
-Some built-in commands (like `/call`) act directly on the current scope object, letting you invoke any field, property, or method via reflection:
+`/call` acts on the current scope object, invoking any field, property or method by reflection:
 - Read field profile.Name: `/call Name`   
 - Set field profile.Name: `/call Name "New name here"`   
 - Call method profile.SetAge(int age): `/call SetAge 30`   
@@ -173,7 +187,7 @@ From NjConsole’s hierarchy panel:
 - Click `⌨` to pass it to the Command Line.
 
 ## 🗂 Separating Command Catalogs
-To register commands for Command Line only (not Options Menu):
+To register Command Line-only commands:
 ```csharp
 NjConsole.CommandLineOptions.CreateCatalog...(...)
 ```
@@ -183,7 +197,7 @@ This API is the same as the Options Menu catalog.
 - Put all Options Menu commands into a subfolder: ```NjConsole.Options.CommandLinePath = "<folder>"```
 
 ## 🗝️ Accessing stored variable from code
-You can access stored variables programmatically the same way built-in commands do:
+Reach stored variables the same way the built-in commands do:
 ```csharp
 var storage = NjConsole.Modules.GetOrCreateModule<ConsoleObjReferenceStorage>();
 var lastResult = storage.GetLastResult();   // same as `storage.GetStored("_")`
@@ -191,12 +205,12 @@ var scope = storage.GetScope();     // same as `storage.GetStored("@")`
 var customVar = storage.GetStored("profile");   // if you called `/store profile`
 ```
 
-> Returned objects, scopes and other stored $ variables will be strong referenced and will not be garbage collected.   
-> Call `/clear stored` to clear everything.
+> Stored `$` variables, returned objects and scopes are strong references and won't be collected.
+> `/clear stored` releases them.
 
 ## 🖇️ Custom Command Line Handling (Input Prompt Takeover)
-If a command returns an IConsoleCommandlineModule, the Command Line switches into a locked mode, where the next input is routed to that module.
-This is useful for creating interactive prompts, multi-step wizards, or temporary modes.
+Return an `IConsoleCommandlineModule` and the Command Line locks, routing the next input to that module —
+useful for interactive prompts, multi-step wizards, or temporary modes.
 ```
 [ConsoleOption("food prompt")]
 IConsoleCommandlineModule FoodPrompt() => new DemoFoodPromptHandler();
@@ -224,17 +238,17 @@ class DemoFoodPromptHandler : IConsoleCommandlineModule {
     }
 }
 ```
-See `GuessNumberCommandLineGame` in DemoNjConsole.cs or call `guessTheNumber` in demo scene for a full example.
+See `GuessNumberCommandLineGame` in DemoNjConsole.cs, or run `guessthenumber` in the demo scene for a full example.
 
 ## 🔌 Adding a Custom Executor
 
-Similar to custom input prompt handling, you can also create an extension and add it in project settings.
-1. Create a class that implements IConsoleCommandlineModule and fill in the required implementation.
+Same interface, registered as an extension instead:
+1. Create a class that implements `IConsoleCommandlineModule`.
 2. (Optional) Implement `PopulateHelpSuggestions(List<string> helpLines)` to display help text.
 3. Implement IConsoleExtension.
 4. Add [Serializable] attribute.
-5. Go to `Project Settings > NjConsole > Extension Modules > Add Extension Module` > add your new class
-6. Press `Apply changes`
+5. Go to `Project Settings > Ninjadini ⌨ Console > Extension Modules > Add Extension Module` > add your new class
+6. Press `Apply extension changes`
 
 ```
 [Serializable]
@@ -247,7 +261,7 @@ public class DemoFoodPromptHandler : IConsoleCommandlineModule, IConsoleExtensio
 
     public bool PersistInEditMode => true; // OPTIONAL: If you need your custom commands to be runnable outside play-mode.
 
-    void OnAdded(ConsoleModules modules) {
+    void IConsoleModule.OnAdded(ConsoleModules modules) {
         // OPTIONAL: How to disable Options Menu's command line.
         var optionsCmdModule = NjConsole.Modules.GetModule<OptionCommandsModule>(false);
         if (optionsCmdModule != null)
@@ -257,7 +271,7 @@ public class DemoFoodPromptHandler : IConsoleCommandlineModule, IConsoleExtensio
     }
 }
 ```
-Your custom executor is evaluated before the default Command Line, except that `/` commands always take priority.   
-If `TryRun()` returns `false`, NjConsole passes the input to the next enabled Command Line Module.
+Custom executors run before the default Command Line, though `/` commands always win.
+Return `false` from `TryRun()` and the input passes to the next enabled module.
 
 [NjConsole doc home](index.md)
