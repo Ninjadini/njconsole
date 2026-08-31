@@ -44,7 +44,7 @@ NjConsole relies on Unity’s UI Toolkit, which became stable for runtime use in
 
 - [Command Line](commandline.md) — running options as commands, variables, scopes
 
-- [Inspector, Hierarchy & Utilities](inspector.md) — the object inspector, scene tree, monitors and tools
+- [Inspector & Utilities](inspector.md) — the object inspector, scene tree, monitors and tools
 
 **Advanced**
 

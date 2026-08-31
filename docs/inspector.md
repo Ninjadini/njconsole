@@ -1,44 +1,15 @@
 ---
-title: Inspector, Hierarchy & Utilities
+title: Inspector & Utilities
 nav_section: "Core"
 nav_order: 5
 nav_icon: "🔍"
 ---
 
-# 🔍 Object Inspector
-
-The shared view for looking at — and editing — a live object. It opens from several places:
-
-- Clicking an object link in a [log](logging.md#-logs-object-linking)
-- Clicking a GameObject or component in the **Hierarchy** panel
-- Right-clicking a GameObject in Unity's own Hierarchy → `Inspect in ⌨ NjConsole` (Editor only)
-- `/inspect` in the [Command Line](commandline.md)
-- `Utilities > Tools > Types inspector`, to reach static members of any loaded type
-- From your own code: `Ninjadini.Console.UI.ConsoleInspector.Show(someContainerElement, myObject);`
-
-<img src="images/logs-inspector.png" alt="Screenshot of the object inspector" width="450" >
-
-- **Read and edit** fields and properties. Types that aren't supported yet show read-only.
-- **Follow references** into nested objects; `◀` walks back.
-- **Call methods**, including ones taking parameters.
-- **View static members** via the `View static members >` button.
-- **`Types`** — search loaded assemblies for any type to inspect its statics.
-- **`⌨`** — send the object to the Command Line as the current scope, ready for `/call`, `/store` and the
-  rest. See [Accessing Logged Objects](commandline.md#-accessing-logged-objects).
-
-> **Auto read properties** — the toggle at the top. Reading a property can have side effects
-> (`Renderer.material` duplicates the `sharedMaterial`), so some aren't read until you ask.
-
-> `Features > In Player Object Inspector` turns it off for player builds — that switch also covers log object
-> links, hierarchy component detail, and the type search.
-
----
-
 # 📂 Hierarchy panel
 
 A live view of the scene tree, `DontDestroyOnLoad` included. Expand through children, then click a GameObject
-to open it in the Object Inspector and edit its components while the game runs — which is the point when
-you're on a device and the Editor's own hierarchy isn't there.
+to open it in the [Object Inspector](#-object-inspector) and edit its components while the game runs — which
+is the point when you're on a device and the Editor's own hierarchy isn't there.
 
 ---
 
@@ -95,5 +66,34 @@ just render as text.
 </div>
 
 > `Features > In Player Utilities Panel` disables the whole panel for player builds.
+
+---
+
+# 🔍 Object Inspector
+
+The shared view for looking at — and editing — a live object. It opens from several places:
+
+- Clicking an object link in a [log](logging.md#-logs-object-linking)
+- Clicking a GameObject or component in the **Hierarchy** panel
+- Right-clicking a GameObject in Unity's own Hierarchy → `Inspect in ⌨ NjConsole` (Editor only)
+- `/inspect` in the [Command Line](commandline.md)
+- `Utilities > Tools > Types inspector`, to reach static members of any loaded type
+- From your own code: `Ninjadini.Console.UI.ConsoleInspector.Show(someContainerElement, myObject);`
+
+<img src="images/logs-inspector.png" alt="Screenshot of the object inspector" width="450" >
+
+- **Read and edit** fields and properties. Types that aren't supported yet show read-only.
+- **Follow references** into nested objects; `◀` walks back.
+- **Call methods**, including ones taking parameters.
+- **View static members** via the `View static members >` button.
+- **`Types`** — search loaded assemblies for any type to inspect its statics.
+- **`⌨`** — send the object to the Command Line as the current scope, ready for `/call`, `/store` and the
+  rest. See [Accessing Logged Objects](commandline.md#-accessing-logged-objects).
+
+> **Auto read properties** — the toggle at the top. Reading a property can have side effects
+> (`Renderer.material` duplicates the `sharedMaterial`), so some aren't read until you ask.
+
+> `Features > In Player Object Inspector` turns it off for player builds — that switch also covers log object
+> links, hierarchy component detail, and the type search.
 
 [NjConsole doc home](index.md)
