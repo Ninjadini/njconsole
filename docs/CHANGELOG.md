@@ -6,6 +6,7 @@ nav_icon: "📋"
 ---
 
 ## 1.3.1
+✨ Updated GettingStarted.pdf to reflect the latest features and improvements.
 ✨ `NjConsole.Overlay.Toggle()` to show or hide the overlay in one call.   
 🐛 Fixed some of the new UI symbols not rendering on certain platforms.   
 🐛 Fixed on-screen keyboard staying up after you leave a text field - search, command line and text prompts.   
