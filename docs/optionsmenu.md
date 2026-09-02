@@ -336,7 +336,7 @@ There are `UnityEngine.InputSystem.Key` overloads of each of these too.
 
 ## 💬 Tooltips / hint text
 
-Any item can carry a hint, shown in the UI and in Command Line autocomplete:
+Any item can carry a hint:
 ```csharp
 catalog.AddButton("Reload Scene", ReloadScene).SetTooltip("Reloads the currently active scene");
 ```
@@ -346,5 +346,9 @@ With the attribute, use Unity's `[Tooltip]`:
 [Tooltip("Get or set user profile name")]
 public string Name;
 ```
+Tooltip shows up in three places:
+- **Options Menu** — a hover tooltip on the item, so Editor and desktop only; there's no hover on touch. - also sadly Unity sometimes doesn't show tooltip during playmode.
+- **Command Line autocomplete** — next to the suggestion.
+- **`/help`** — next to the command.
 
 [NjConsole doc home](index.md)

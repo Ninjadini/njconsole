@@ -39,7 +39,7 @@ switch between prompt and normal input.
 
 | Command | What it does |
 |---|---|
-| `/help` | List every available command |
+| `/help` | List every available command, with argument hints and tooltips |
 | `/clear logs` | Clear the log history |
 | `/filter cmds` | Filter the Logs panel down to Command Line output only |
 | `/filter reset` | Clear all log filters |
@@ -75,7 +75,7 @@ Command: `sayhello`
 
 ```csharp
 [ConsoleOption("profile/name")]
-[Tooltip("Get or set user profile name")] // shows as hint text
+[Tooltip("Get or set user profile name")] // shows in autocomplete and /help
 public string Name;
 ```
 Get Command: `profile/name`   
@@ -115,6 +115,17 @@ struct PositionAndSize {
 }
 ```
 Command: `nestedConstructor ((1, 2, 3), 3), "hello there"`
+
+`/help` ends with a general reminder of this syntax, and any argument-parsing error repeats it. For a
+per-command example, add a `[Tooltip]` — the autocomplete hint is generated from the signature
+(`<Vector3 a> <Single b>`), which says nothing about the parentheses:
+
+```csharp
+[ConsoleOption("math / vector multiply")]
+[Tooltip("Example param: (1 2 3) 1  OR  (1,2,3),1")]
+static Vector3 MultiplyV(Vector3 a, float b) => a * b;
+```
+The tooltip shows next to the command in **autocomplete** and in **`/help`**.
 
 ---
 
